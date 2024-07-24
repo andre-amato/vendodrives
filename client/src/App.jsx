@@ -1,17 +1,15 @@
-import Button from './components/Button';
-import Header from './components/Header';
-import Card from './components/Card';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Main from './pages/Main';
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <main className='p-4'>
-        <p className='text-gray-700'>This is your VendoDrives app!</p>
-        <Card />
-        <Button />
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/main' element={<Main />} />
+      </Routes>
+    </Router>
   );
 };
 
