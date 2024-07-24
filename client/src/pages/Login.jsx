@@ -17,7 +17,6 @@ const Login = () => {
           <div className='mb-4'>
             <label className='block text-gray-700'>Email</label>
             <input
-              type='email'
               className='w-full p-2 border border-gray-300 rounded mt-1'
               required
             />
@@ -25,7 +24,6 @@ const Login = () => {
           <div className='mb-6'>
             <label className='block text-gray-700'>Password</label>
             <input
-              type='password'
               className='w-full p-2 border border-gray-300 rounded mt-1'
               required
             />

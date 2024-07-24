@@ -9,11 +9,17 @@ const Main = () => {
       <main className='p-4'>
         <div className='text-gray-700 mb-4'>Welcome to VendoDrives!</div>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-          <Card />
-          <Card />
-          <Card />
-          {/* Add more Card components as needed */}
-          <Button />
+          <div className='flex justify-center'>
+            {' '}
+            {/* Container for centering */}
+            <Button />
+          </div>
+          <div className='flex justify-center'>
+            <Card />
+            <Card />
+            <Card />
+            {/* Add more Card components as needed */}
+          </div>
         </div>
       </main>
     </div>
