@@ -1,4 +1,4 @@
-import Button from '../components/Button';
+import CarForm from '../components/CarForm';
 import Card from '../components/Card';
 import Header from '../components/Header';
 
@@ -12,7 +12,7 @@ const Main = () => {
           <div className='flex justify-center'>
             {' '}
             {/* Container for centering */}
-            <Button />
+            <CarForm />
           </div>
           <div className='flex justify-center'>
             <Card />
