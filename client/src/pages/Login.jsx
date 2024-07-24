@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header'; // Adjust the import path as necessary
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,8 +11,9 @@ const Login = () => {
   };
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gray-100'>
-      <div className='bg-white p-8 rounded shadow-md w-80'>
+    <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
+      <Header showNavLinks={false} /> {/* Header without nav links */}
+      <div className='bg-white p-8 rounded shadow-md w-80 mt-8'>
         <h2 className='text-2xl font-bold mb-6 text-center'>Login</h2>
         <form onSubmit={handleLogin}>
           <div className='mb-4'>
@@ -24,6 +26,7 @@ const Login = () => {
           <div className='mb-6'>
             <label className='block text-gray-700'>Password</label>
             <input
+              type='password'
               className='w-full p-2 border border-gray-300 rounded mt-1'
               required
             />

@@ -1,33 +1,51 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import racingFlag from '../assets/racing-flag.png';
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = ({ showNavLinks = true }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = () => {
-    // For the fake logout, we'll just navigate to the login page
     navigate('/');
   };
 
   return (
-    <header className='bg-blue-500 text-white p-4 flex justify-between items-center'>
-      <h1 className='text-2xl'>Welcome to VendoDrives</h1>
-      <div>
-        {location.pathname === '/messages' ? (
-          <Link to='/main' className='mr-4 hover:underline'>
-            Main
-          </Link>
-        ) : (
-          <Link to='/messages' className='mr-4 hover:underline'>
-            Messages
-          </Link>
-        )}
-        <button onClick={handleLogout} className='hover:underline'>
-          Logout
-        </button>
+    <header className='bg-blue-600 text-white p-6 flex justify-between items-center sticky top-0 shadow-md z-30'>
+      <div className='flex items-center space-x-6'>
+        <img
+          src={racingFlag}
+          alt='Racing Flag'
+          className='w-20 h-12'
+          style={{
+            filter:
+              'invert(100%) sepia(0%) saturate(0%) hue-rotate(360deg) brightness(100%) contrast(100%)',
+          }}
+        />
+        <h1 className='text-4xl font-bold font-bebas'>VendoDrives</h1>
       </div>
+      {showNavLinks && (
+        <div className='flex space-x-6'>
+          {location.pathname === '/messages' ? (
+            <Link to='/main' className='hover:underline'>
+              Main
+            </Link>
+          ) : (
+            <Link to='/messages' className='hover:underline'>
+              Messages
+            </Link>
+          )}
+          <button onClick={handleLogout} className='hover:underline'>
+            Logout
+          </button>
+        </div>
+      )}
     </header>
   );
+};
+
+Header.propTypes = {
+  showNavLinks: PropTypes.bool,
 };
 
 export default Header;

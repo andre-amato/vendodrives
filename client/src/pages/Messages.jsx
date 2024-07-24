@@ -56,7 +56,10 @@ const messages = [
 ];
 
 const Messages = () => {
-  const [messageList, setMessageList] = useState(messages);
+  const [
+    messageList,
+    //setMessageList
+  ] = useState(messages);
 
   return (
     <div className='messages-container bg-gray-50 min-h-screen'>
