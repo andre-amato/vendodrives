@@ -4,17 +4,19 @@ import Header from '../components/Header';
 
 const Main = () => {
   return (
-    <div>
-      <Header />
+    <div className='main-container'>
+      <Header className='sticky top-0 bg-white shadow-md z-30' />{' '}
+      {/* Sticky Header */}
       <main className='p-4'>
-        <div className='text-gray-700 mb-4'>Welcome to VendoDrives!</div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-          <div className='flex justify-center'>
-            {' '}
-            {/* Container for centering */}
+        <div className='flex'>
+          <div className='form-container sticky top-4 w-1/3 h-fit p-4 overflow-y-auto bg-white shadow-md z-20'>
+            {/* Sticky form with 30% width */}
             <CarForm />
           </div>
-          <div className='flex justify-center'>
+          <div className='card-container flex flex-wrap justify-end ml-auto w-2/3 h-screen overflow-y-auto'>
+            <Card />
+            <Card />
+            <Card />
             <Card />
             <Card />
             <Card />

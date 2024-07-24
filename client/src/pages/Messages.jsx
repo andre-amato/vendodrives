@@ -8,14 +8,14 @@ const messages = [
     contact: '+1234567890',
     time: '2024-07-24 10:00:00',
     content:
-      "Hi, I'm interested in buying your [Car Model] you listed. Can you tell me more about it?",
+      "Hi, I'm interested in buying your Volkswagen Gol you listed. Can you tell me more about it?",
   },
   {
     id: 2,
     name: 'Jane Smith',
     contact: 'jane.smith@example.com',
     time: '2024-07-23 15:30:00',
-    content: 'Is my [Car Model] still available for sale?',
+    content: 'Is this Fusca still available for sale?',
   },
   {
     id: 3,
@@ -23,21 +23,21 @@ const messages = [
     contact: 'sarah.lee@company.com',
     time: '2024-07-25 12:00:00',
     content:
-      "I'm selling a slightly used [Car Model] in excellent condition. Are you interested?",
+      "I'm selling a slightly used Fusca in excellent condition. Are you interested?",
   },
   {
     id: 4,
     name: 'David Kim',
     contact: 'david.kim@gmail.com',
     time: '2024-07-24 17:30:00',
-    content: 'Could you send me some pictures of your [Car Model]?',
+    content: 'Could you send me some pictures of your Fusca?',
   },
   {
     id: 5,
     name: 'System Notification',
     contact: 'noreply@service.com',
     time: '2024-07-24 08:00:00',
-    content: 'Reminder: Your listing for [Car Model] expires in 3 days.',
+    content: 'Reminder: Your listing for Fusca expires in 3 days.',
   },
   {
     id: 6,
