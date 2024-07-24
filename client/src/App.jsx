@@ -1,5 +1,6 @@
 import Button from './components/Button';
 import Header from './components/Header';
+import Card from './components/Card';
 
 const App = () => {
   return (
@@ -7,6 +8,7 @@ const App = () => {
       <Header />
       <main className='p-4'>
         <p className='text-gray-700'>This is your VendoDrives app!</p>
+        <Card />
         <Button />
       </main>
     </div>
