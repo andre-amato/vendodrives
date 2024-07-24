@@ -8,12 +8,12 @@ const Main = () => {
       <Header className='sticky top-0 bg-white shadow-md z-30' />{' '}
       {/* Sticky Header */}
       <main className='p-4'>
-        <div className='flex'>
-          <div className='form-container sticky top-4 w-1/3 h-fit p-4 overflow-y-auto bg-white shadow-md z-20'>
-            {/* Sticky form with 30% width */}
+        <div className='flex flex-col sm:flex-row'>
+          <div className='form-container sm:sticky top-4 w-full sm:w-1/3 h-fit p-4 overflow-y-auto bg-white shadow-md z-20'>
+            {/* Sticky form with full width on mobile and 30% width on larger screens */}
             <CarForm />
           </div>
-          <div className='card-container flex flex-wrap justify-end ml-auto w-2/3 h-screen overflow-y-auto'>
+          <div className='card-container flex flex-col sm:flex-row flex-wrap justify-end ml-auto w-full sm:w-2/3'>
             <Card />
             <Card />
             <Card />

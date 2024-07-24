@@ -1,6 +1,6 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import racingFlag from '../assets/racing-flag.png';
 import PropTypes from 'prop-types';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import racingFlag from '../assets/racing-flag.png';
 
 const Header = ({ showNavLinks = true }) => {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Header = ({ showNavLinks = true }) => {
       <div className='flex items-center space-x-6'>
         <img
           src={racingFlag}
+          //original src={<a href="https://pt.vecteezy.com/png/1209683-corrida-de-bandeira">bandeira de corrida PNGs por Vecteezy</a>}
           alt='Racing Flag'
           className='w-20 h-12'
           style={{
