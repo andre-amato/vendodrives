@@ -72,7 +72,7 @@ const CarDetails = () => {
             <p className='text-lg'>Zip Code: {car.zipCode}</p>
           </div>
           {/* Map Section */}
-          <div className='md:w-2/3 p-4 flex-grow'>
+          <div className='md:w-2/3 p-4 flex-grow relative z-map'>
             <MapContainer
               center={
                 coordinates
@@ -81,6 +81,10 @@ const CarDetails = () => {
               } // Default to London
               zoom={13}
               style={{ height: '400px', width: '100%' }}
+              className='relative z-map' // Apply relative position and custom z-index
+              whenCreated={(map) =>
+                map.setView([coordinates.lat, coordinates.lng], 13)
+              }
             >
               <TileLayer
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
