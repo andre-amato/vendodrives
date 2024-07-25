@@ -19,7 +19,7 @@ mongoose
   .catch((err) => console.error('Failed to connect to MongoDB:', err));
 
 // Routes
-app.use('/api/cars', carRoutes);
+app.use('/cars', carRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
