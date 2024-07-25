@@ -2,12 +2,16 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import racingFlag from '../assets/racing-flag.png';
 import PropTypes from 'prop-types';
 
-const Header = ({ showNavLinks = true }) => {
+const Header = ({ showNavLinks = true, onSearch }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = () => {
     navigate('/');
+  };
+
+  const handleSearchChange = (e) => {
+    onSearch(e.target.value);
   };
 
   return (
@@ -28,6 +32,14 @@ const Header = ({ showNavLinks = true }) => {
       </div>
       {showNavLinks && (
         <nav className='flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6'>
+          {location.pathname === '/main' && (
+            <input
+              type='text'
+              placeholder='Search...'
+              className='mt-2 px-4 py-2 border border-gray-300 rounded w-full sm:w-auto text-black'
+              onChange={handleSearchChange}
+            />
+          )}
           {location.pathname === '/messages' ? (
             <Link to='/main' className='text-lg sm:text-xl hover:underline'>
               Main
@@ -51,6 +63,7 @@ const Header = ({ showNavLinks = true }) => {
 
 Header.propTypes = {
   showNavLinks: PropTypes.bool,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Header;

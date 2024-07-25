@@ -2,9 +2,14 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const CarForm = ({ onSubmit }) => {
+  const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [photo, setPhoto] = useState(null);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
   const handlePriceChange = (e) => {
     const value = e.target.value;
@@ -28,7 +33,13 @@ const CarForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ price, zipCode, photo });
+    // Handle form submission logic here
+    onSubmit({ title, price, zipCode, photo });
+    // Clear the form fields
+    setTitle('');
+    setPrice('');
+    setZipCode('');
+    setPhoto(null);
   };
 
   return (
@@ -38,6 +49,8 @@ const CarForm = ({ onSubmit }) => {
         <label className='w-1/4 text-gray-700 mr-2'>Car:</label>
         <input
           type='text'
+          value={title}
+          onChange={handleTitleChange}
           className='w-full px-2 py-1 border border-gray-300 rounded'
         />
       </div>
