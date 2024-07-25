@@ -1,13 +1,34 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import Header from '../components/Header'; // Adjust the import path as needed
+import { getCoordinatesFromZipCode } from '../utils/geocode'; // Import the geocode function
+import PropTypes from 'prop-types';
+
+const SetMapView = ({ coordinates }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (coordinates) {
+      map.setView([coordinates.lat, coordinates.lng], 13);
+    }
+  }, [coordinates, map]);
+
+  return null;
+};
+
+SetMapView.propTypes = {
+  coordinates: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+  }),
+};
 
 const CarDetails = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
+  const [coordinates, setCoordinates] = useState(null); // Start with null
 
   useEffect(() => {
     const fetchCarDetails = async () => {
@@ -18,6 +39,12 @@ const CarDetails = () => {
           },
         });
         setCar(response.data);
+
+        // Fetch coordinates based on the zip code
+        const { lat, lng } = await getCoordinatesFromZipCode(
+          response.data.zipCode
+        );
+        setCoordinates({ lat, lng });
       } catch (error) {
         console.error('Error fetching car details:', error);
       }
@@ -47,7 +74,11 @@ const CarDetails = () => {
           {/* Map Section */}
           <div className='md:w-2/3 p-4 flex-grow'>
             <MapContainer
-              center={[51.505, -0.09]} // Placeholder coordinates
+              center={
+                coordinates
+                  ? [coordinates.lat, coordinates.lng]
+                  : [51.505, -0.09]
+              } // Default to London
               zoom={13}
               style={{ height: '400px', width: '100%' }}
             >
@@ -55,9 +86,12 @@ const CarDetails = () => {
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
-              <Marker position={[51.505, -0.09]}>
-                <Popup>{car.title}</Popup>
-              </Marker>
+              <SetMapView coordinates={coordinates} />
+              {coordinates && (
+                <Marker position={[coordinates.lat, coordinates.lng]}>
+                  <Popup>{car.title}</Popup>
+                </Marker>
+              )}
             </MapContainer>
           </div>
         </div>
