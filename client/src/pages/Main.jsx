@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CarForm from '../components/CarForm';
 import Card from '../components/Card';
 import Header from '../components/Header';
@@ -6,6 +6,21 @@ import Header from '../components/Header';
 const Main = () => {
   const [cards, setCards] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Fetch car data from the server
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/cars');
+        const data = await response.json();
+        setCards(data);
+      } catch (error) {
+        console.error('Error fetching car data:', error);
+      }
+    };
+
+    fetchCars();
+  }, []);
 
   const handleFormSubmit = (carDetails) => {
     setCards([...cards, carDetails]);

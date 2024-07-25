@@ -8,9 +8,7 @@ const Card = ({ carDetails }) => {
       <img
         className='object-cover'
         style={{ width: '400px', height: '400px' }}
-        src={
-          photo ? URL.createObjectURL(photo) : 'https://via.placeholder.com/400'
-        }
+        src={photo || 'https://via.placeholder.com/400'}
         alt={title || 'Sample Image'}
       />
       <div className='px-6 py-4'>
@@ -35,9 +33,9 @@ const Card = ({ carDetails }) => {
 Card.propTypes = {
   carDetails: PropTypes.shape({
     title: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // Allows both string and number
     zipCode: PropTypes.string,
-    photo: PropTypes.object,
+    photo: PropTypes.string,
   }).isRequired,
 };
 
