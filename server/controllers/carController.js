@@ -47,4 +47,21 @@ const createCar = (req, res) => {
   uploadStream.end(req.file.buffer);
 };
 
-module.exports = { getCars, createCar, upload };
+// New controller function
+const getCarById = async (req, res) => {
+  const { id } = req.params;
+  console.log('Extracted ID:', id); // Log the extracted ID
+
+  try {
+    const car = await Car.findById(id);
+    console.log('Found Car:', car); // Log the retrieved car data
+    if (!car) {
+      return res.status(404).json({ message: 'Car not found' });
+    }
+    res.json(car);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getCars, createCar, getCarById, upload };
