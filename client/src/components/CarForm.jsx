@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const CarForm = () => {
+const CarForm = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [zipCode, setZipCode] = useState('');
@@ -33,7 +34,7 @@ const CarForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log('Form submitted:', { title, price, zipCode, photo });
+    onSubmit({ title, price, zipCode, photo });
     // Clear the form fields
     setTitle('');
     setPrice('');
@@ -99,6 +100,10 @@ const CarForm = () => {
       </button>
     </form>
   );
+};
+
+CarForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default CarForm;
