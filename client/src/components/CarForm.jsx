@@ -7,35 +7,22 @@ const CarForm = ({ onSubmit }) => {
   const [zipCode, setZipCode] = useState('');
   const [photo, setPhoto] = useState(null);
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
+  const handleTitleChange = (e) => setTitle(e.target.value);
   const handlePriceChange = (e) => {
     const value = e.target.value;
-    // Remove non-numeric characters except '.'
-    const formattedValue = value.replace(/[^\d.]/g, '');
-    setPrice(formattedValue);
+    setPrice(value.replace(/[^\d.]/g, ''));
   };
-
   const handleZipCodeChange = (e) => {
     const value = e.target.value;
-    // ZIP CODE FORMAT -> Allow only numbers and limit the length
-    const formattedValue = value.replace(/[^0-9]/g, '').slice(0, 10);
-    setZipCode(formattedValue);
+    setZipCode(value.replace(/[^0-9]/g, '').slice(0, 10));
   };
-
   const handlePhotoChange = (e) => {
-    if (e.target.files.length > 0) {
-      setPhoto(e.target.files[0]);
-    }
+    if (e.target.files.length > 0) setPhoto(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     onSubmit({ title, price, zipCode, photo });
-    // Clear the form fields
     setTitle('');
     setPrice('');
     setZipCode('');

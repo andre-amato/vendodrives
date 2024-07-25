@@ -1,8 +1,9 @@
+// src/components/Header.jsx
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import racingFlag from '../assets/racing-flag.png';
 import PropTypes from 'prop-types';
 
-const Header = ({ showNavLinks = true, onSearch }) => {
+const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -63,7 +64,7 @@ const Header = ({ showNavLinks = true, onSearch }) => {
 
 Header.propTypes = {
   showNavLinks: PropTypes.bool,
-  onSearch: PropTypes.func.isRequired,
+  onSearch: PropTypes.func,
 };
 
 export default Header;
