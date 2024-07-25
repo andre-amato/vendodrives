@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const CarForm = () => {
+  const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [photo, setPhoto] = useState(null);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
   const handlePriceChange = (e) => {
     const value = e.target.value;
@@ -28,7 +33,12 @@ const CarForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log('Form submitted:', { price, zipCode, photo });
+    console.log('Form submitted:', { title, price, zipCode, photo });
+    // Clear the form fields
+    setTitle('');
+    setPrice('');
+    setZipCode('');
+    setPhoto(null);
   };
 
   return (
@@ -38,6 +48,8 @@ const CarForm = () => {
         <label className='w-1/4 text-gray-700 mr-2'>Car:</label>
         <input
           type='text'
+          value={title}
+          onChange={handleTitleChange}
           className='w-full px-2 py-1 border border-gray-300 rounded'
         />
       </div>
