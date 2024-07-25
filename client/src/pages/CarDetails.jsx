@@ -1,68 +1,67 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import L from 'leaflet';
+import axios from 'axios';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import Header from '../components/Header'; // Adjust the import path as needed
 
 const CarDetails = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
 
   useEffect(() => {
-    const loadCar = async () => {
+    const fetchCarDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/cars/${id}`);
-        const carData = await response.json();
-        setCar(carData);
+        const response = await axios.get(`http://localhost:5001/cars/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setCar(response.data);
       } catch (error) {
-        console.error('Error loading car:', error);
+        console.error('Error fetching car details:', error);
       }
     };
 
-    loadCar();
+    fetchCarDetails();
   }, [id]);
 
-  useEffect(() => {
-    if (car && car.zipCode) {
-      const map = L.map('map').setView([0, 0], 13); // Default center
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
-
-      // Use Nominatim to convert zip code to coordinates
-      fetch(
-        `https://nominatim.openstreetmap.org/search?postalcode=${car.zipCode}&format=json`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          const { lat, lon } = data[0];
-          map.setView([lat, lon], 13);
-          L.marker([lat, lon])
-            .addTo(map)
-            .bindPopup(`Car Location: ${car.zipCode}`);
-        });
-    }
-  }, [car]);
-
-  if (!car) return <div>Loading...</div>;
+  if (!car) return <p>Loading...</p>;
 
   return (
-    <div className='car-details-container'>
-      <h1 className='text-2xl font-bold'>{car.title}</h1>
-      <img
-        src={
-          car.photo
-            ? URL.createObjectURL(car.photo)
-            : 'https://via.placeholder.com/400'
-        }
-        alt={car.title}
-        className='w-64 h-64'
-      />
-      <p>Price: {car.price ? `€${car.price}` : 'N/A'}</p>
-      <p>Zip Code: {car.zipCode || 'N/A'}</p>
-      <div id='map' style={{ height: '400px', width: '100%' }}></div>{' '}
-      {/* Map container */}
+    <div className='car-details'>
+      <Header /> {/* Header component at the top */}
+      <main className='p-4 flex flex-col items-center'>
+        <h1 className='text-3xl font-bold text-center mb-4'>{car.title}</h1>
+        <div className='flex flex-col md:flex-row w-full max-w-6xl'>
+          {/* Car Details Section */}
+          <div className='md:w-1/3 p-4 flex flex-col items-center md:items-start'>
+            <img
+              src={car.photo}
+              alt={car.title}
+              className='w-full h-auto object-cover rounded-lg shadow-md'
+            />
+            <p className='text-lg mt-4'>Price: €{car.price}</p>
+            <p className='text-lg'>Zip Code: {car.zipCode}</p>
+          </div>
+          {/* Map Section */}
+          <div className='md:w-2/3 p-4 flex-grow'>
+            <MapContainer
+              center={[51.505, -0.09]} // Placeholder coordinates
+              zoom={13}
+              style={{ height: '400px', width: '100%' }}
+            >
+              <TileLayer
+                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+              <Marker position={[51.505, -0.09]}>
+                <Popup>{car.title}</Popup>
+              </Marker>
+            </MapContainer>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };

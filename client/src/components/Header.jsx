@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import racingFlag from '../assets/racing-flag.png';
 import PropTypes from 'prop-types';
@@ -14,6 +13,9 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
   const handleSearchChange = (e) => {
     onSearch(e.target.value);
   };
+
+  // Determine if we are on the /main page or not
+  const isOnMainPage = location.pathname === '/main';
 
   return (
     <header className='bg-blue-600 text-white p-4 sm:p-6 flex justify-between items-center sticky top-0 shadow-md z-30'>
@@ -33,22 +35,28 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
       </div>
       {showNavLinks && (
         <nav className='flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6'>
-          {location.pathname === '/main' && (
-            <input
-              type='text'
-              placeholder='Search...'
-              className='mt-2 px-4 py-2 border border-gray-300 rounded w-full sm:w-auto text-black'
-              onChange={handleSearchChange}
-            />
+          {!isOnMainPage && (
+            <>
+              <Link to='/main' className='text-lg sm:text-xl hover:underline'>
+                Main
+              </Link>
+            </>
           )}
-          {location.pathname === '/messages' ? (
-            <Link to='/main' className='text-lg sm:text-xl hover:underline'>
-              Main
-            </Link>
-          ) : (
-            <Link to='/messages' className='text-lg sm:text-xl hover:underline'>
-              Messages
-            </Link>
+          {isOnMainPage && (
+            <>
+              <input
+                type='text'
+                placeholder='Search...'
+                className='mt-2 px-4 py-2 border border-gray-300 rounded w-full sm:w-auto text-black'
+                onChange={handleSearchChange}
+              />
+              <Link
+                to='/messages'
+                className='text-lg sm:text-xl hover:underline'
+              >
+                Messages
+              </Link>
+            </>
           )}
           <button
             onClick={handleLogout}
