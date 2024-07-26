@@ -62,32 +62,32 @@ const Main = () => {
         className='sticky top-0 bg-white shadow-md z-30'
       />
       <main className='p-4 bg-white'>
-        {/* Sorting Controls */}
-        <div className='flex gap-4 mb-4 justify-end'>
-          <select
-            value={sortCriteria}
-            onChange={(e) => setSortCriteria(e.target.value)}
-            className='p-2 border border-gray-300 rounded'
-          >
-            <option value='title'>Name</option>
-            <option value='price'>Price</option>
-            <option value='zipCode'>Zip Code</option>
-          </select>
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className='p-2 border border-gray-300 rounded'
-          >
-            <option value='asc'>Ascending</option>
-            <option value='desc'>Descending</option>
-          </select>
-        </div>
         <div className='flex flex-col sm:flex-row'>
-          <div className='sm:sticky top-4 w-full sm:w-1/3 h-fit p-4 bg-white'>
-            {/* No border here */}
+          <div className='w-full sm:w-1/3 p-4 bg-white'>
+            {/* CarForm on top for all views */}
             <CarForm onSubmit={handleFormSubmit} />
           </div>
-          <div className='sm:w-2/3 w-full'>
+          <div className='w-full sm:w-2/3'>
+            {/* Sorting Controls */}
+            <div className='flex flex-col sm:flex-row sm:justify-end gap-4 mb-4 p-4 bg-white'>
+              <select
+                value={sortCriteria}
+                onChange={(e) => setSortCriteria(e.target.value)}
+                className='p-2 border border-gray-300 rounded'
+              >
+                <option value='title'>Name</option>
+                <option value='price'>Price</option>
+                <option value='zipCode'>Zip Code</option>
+              </select>
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className='p-2 border border-gray-300 rounded'
+              >
+                <option value='asc'>Ascending</option>
+                <option value='desc'>Descending</option>
+              </select>
+            </div>
             {/* Cards */}
             <div className='card-container flex flex-col sm:flex-row flex-wrap justify-end ml-auto w-full'>
               {sortedCards.map((card, index) => (
