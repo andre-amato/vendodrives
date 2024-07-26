@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import racingFlag from '../assets/racing-flag.png';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import HamburgerButton from './HamburguerButton'; // Import the new HamburgerButton component
 
 const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
   const navigate = useNavigate();
@@ -41,12 +42,7 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
       {showNavLinks && (
         <nav className='w-full sm:w-auto'>
           <div className='flex justify-end sm:hidden'>
-            <button
-              onClick={toggleMenu}
-              className='text-3xl focus:outline-none'
-            >
-              {isMenuOpen ? '✕' : '☰'}
-            </button>
+            <HamburgerButton onClick={toggleMenu} />
           </div>
           <div
             className={`flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 ${
