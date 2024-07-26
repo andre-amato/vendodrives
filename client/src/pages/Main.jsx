@@ -82,7 +82,7 @@ const Main = () => {
             <option value='desc'>Descending</option>
           </select>
         </div>
-        <div className='flex flex-col sm:flex-row items-start'>
+        <div className='flex flex-col sm:flex-row'>
           <div className='sm:sticky top-4 w-full sm:w-1/3 h-fit p-4 bg-white'>
             {/* No border here */}
             <CarForm onSubmit={handleFormSubmit} />

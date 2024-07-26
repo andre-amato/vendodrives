@@ -58,24 +58,27 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
                 <input
                   type='text'
                   placeholder='Search...'
-                  className='mt-2 sm:mt-0 px-4 py-2 border border-gray-300 rounded w-full sm:w-auto text-black'
+                  className='mt-2 sm:mt-0 px-4 py-2 border border-gray-300 rounded-full w-full sm:w-auto text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500'
                   onChange={handleSearchChange}
                 />
                 <Link
                   to='/messages'
-                  className='text-lg sm:text-xl hover:underline'
+                  className='py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
                 >
                   Messages
                 </Link>
               </>
             ) : (
-              <Link to='/main' className='text-lg sm:text-xl hover:underline'>
+              <Link
+                to='/main'
+                className='py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+              >
                 Main
               </Link>
             )}
             <button
               onClick={handleLogout}
-              className='text-lg sm:text-xl hover:underline'
+              className='py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
             >
               Logout
             </button>
