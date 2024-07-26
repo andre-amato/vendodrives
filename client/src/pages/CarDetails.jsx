@@ -59,17 +59,17 @@ const CarDetails = () => {
     <div className='car-details'>
       <Header /> {/* Header component at the top */}
       <main className='p-4 flex flex-col items-center'>
-        <h1 className='text-3xl font-bold text-center mb-4'>{car.title}</h1>
         <div className='flex flex-col md:flex-row w-full max-w-6xl'>
           {/* Car Details Section */}
           <div className='md:w-1/3 p-4 flex flex-col items-center md:items-start'>
+            <h1 className='text-3xl font-bold text-center mb-4'>{car.title}</h1>
+            <p className='text-lg mt-4'>Price: €{car.price}</p>
+            <p className='text-lg'>Zip Code: {car.zipCode}</p>
             <img
               src={car.photo}
               alt={car.title}
-              className='w-full h-auto object-cover rounded-lg shadow-md'
+              className='w-full h-auto object-cover rounded-lg shadow-md mt-8' // Added margin-top to push the image down
             />
-            <p className='text-lg mt-4'>Price: €{car.price}</p>
-            <p className='text-lg'>Zip Code: {car.zipCode}</p>
           </div>
           {/* Map Section */}
           <div className='md:w-2/3 p-4 flex-grow relative z-map'>
