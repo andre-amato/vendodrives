@@ -30,64 +30,75 @@ const CarForm = ({ onSubmit }) => {
   };
 
   return (
-    <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-      <h2 className='text-xl text-center font-bold text-gray-800'>
-        Post you car!{' '}
-      </h2>
-      <div className='flex flex-row items-center'>
-        <label className='w-1/4 text-gray-700 mr-2'>Car:</label>
-        <input
-          type='text'
-          value={title}
-          onChange={handleTitleChange}
-          className='w-full px-2 py-1 border border-gray-300 rounded'
-        />
-      </div>
-      <div className='flex flex-row items-center'>
-        <label className='w-1/4 text-gray-700 mr-2'>Price:</label>
-        <input
-          type='text'
-          value={price}
-          onChange={handlePriceChange}
-          className='w-full px-2 py-1 border border-gray-300 rounded'
-          placeholder='€0.00'
-        />
-      </div>
-      <div className='flex flex-row items-center'>
-        <label className='w-1/4 text-gray-700 mr-2'>Zip Code:</label>
-        <input
-          type='text'
-          value={zipCode}
-          onChange={handleZipCodeChange}
-          className='w-full px-2 py-1 border border-gray-300 rounded'
-          placeholder='Enter Zip Code'
-          maxLength='10'
-        />
-      </div>
-      <div className='flex flex-row items-center'>
-        <label className='w-1/4 text-gray-700 mr-2'>Photo:</label>
-        <div className='relative w-full'>
-          <input
-            type='file'
-            onChange={handlePhotoChange}
-            className='absolute opacity-0 w-full h-full cursor-pointer'
-            id='photo-upload'
-          />
-          <label
-            htmlFor='photo-upload'
-            className='py-2 px-4 border border-gray-300 rounded bg-white text-gray-700 cursor-pointer flex items-center justify-center'
-          >
-            {photo ? `Selected file: ${photo.name}` : 'Choose Photo'}
-          </label>
-        </div>
-      </div>
-      <button
-        type='submit'
-        className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+    <div className='flex justify-center items-start bg-white py-4'>
+      <form
+        className='bg-white p-8 rounded-2xl border-4 border-blue-500 border-opacity-50 w-96'
+        onSubmit={handleSubmit}
       >
-        Submit
-      </button>
-    </form>
+        <h2 className='text-xl text-center font-bold text-gray-800 mb-4'>
+          Post your car!
+        </h2>
+        <div className='flex flex-col gap-4'>
+          <div className='flex flex-row items-center'>
+            <label className='w-1/4 text-gray-700 mr-2'>Car:</label>
+            <input
+              type='text'
+              value={title}
+              onChange={handleTitleChange}
+              className='w-full px-3 py-2 border border-gray-300 rounded-lg'
+            />
+          </div>
+          <div className='flex flex-row items-center'>
+            <label className='w-1/4 text-gray-700 mr-2'>Price:</label>
+            <input
+              type='text'
+              value={price}
+              onChange={handlePriceChange}
+              className='w-full px-3 py-2 border border-gray-300 rounded-lg'
+              placeholder='€0.00'
+            />
+          </div>
+          <div className='flex flex-row items-center'>
+            <label className='w-1/4 text-gray-700 mr-2'>Zip Code:</label>
+            <input
+              type='text'
+              value={zipCode}
+              onChange={handleZipCodeChange}
+              className='w-full px-3 py-2 border border-gray-300 rounded-lg'
+              placeholder='Enter Zip Code'
+              maxLength='10'
+            />
+          </div>
+          <div className='flex flex-row items-center'>
+            <label className='w-1/4 text-gray-700 mr-2'>Photo:</label>
+            <div className='relative w-full'>
+              <input
+                type='file'
+                onChange={handlePhotoChange}
+                className='absolute opacity-0 w-full h-full cursor-pointer'
+                id='photo-upload'
+              />
+              <label
+                htmlFor='photo-upload'
+                className={`py-2 px-4 border-2 rounded-lg cursor-pointer flex items-center justify-center ${
+                  photo
+                    ? 'border-blue-500 bg-white text-blue-500'
+                    : 'border-gray-300 bg-white text-gray-700'
+                }`}
+              >
+                {photo ? `Selected file: ${photo.name}` : 'Choose Photo'}
+              </label>
+            </div>
+          </div>
+          <button
+            type='submit'
+            className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg'
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

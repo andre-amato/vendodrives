@@ -5,10 +5,10 @@ const Card = ({ carDetails }) => {
   const { _id, title, price, zipCode, photo } = carDetails;
 
   return (
-    <div className='max-w-sm rounded overflow-hidden shadow-lg m-4 bg-white'>
+    <div className='max-w-sm rounded-2xl overflow-hidden shadow-lg m-4 bg-white'>
       <Link to={`/car-details/${_id}`}>
         <img
-          className='object-cover'
+          className='object-cover rounded-t-2xl' // Rounded top corners for the image
           style={{ width: '400px', height: '400px' }}
           src={photo ? photo : 'https://via.placeholder.com/400'}
           alt={title || 'Sample Image'}
