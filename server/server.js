@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const carRoutes = require('./routes/carRoutes');
-const multer = require('multer');
+const userRoutes = require('./routes/userRoutes');
 const path = require('path');
 const cors = require('cors'); // Import cors
 require('dotenv').config(); // Ensure environment variables are loaded
@@ -23,6 +23,7 @@ mongoose
 
 // Routes
 app.use('/cars', carRoutes);
+app.use('/users', userRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
