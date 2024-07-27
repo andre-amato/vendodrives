@@ -64,4 +64,19 @@ const getCarById = async (req, res) => {
   }
 };
 
-module.exports = { getCars, createCar, getCarById, upload };
+// DeleteCar function
+const deleteCar = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedCar = await Car.findByIdAndDelete(id);
+    if (!deletedCar) {
+      return res.status(404).json({ message: 'Car not found' });
+    }
+    res.json({ message: 'Car deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getCars, createCar, getCarById, deleteCar, upload };

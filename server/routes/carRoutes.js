@@ -4,6 +4,7 @@ const {
   getCars,
   createCar,
   getCarById,
+  deleteCar,
 } = require('../controllers/carController');
 const multer = require('multer');
 
@@ -18,5 +19,8 @@ router.get('/:id', getCarById);
 
 // Route to create a car
 router.post('/', upload, createCar);
+
+// Route to delete a car by ID
+router.delete('/:id', deleteCar);
 
 module.exports = router;
