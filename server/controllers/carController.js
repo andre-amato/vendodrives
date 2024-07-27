@@ -8,7 +8,7 @@ const upload = multer({ storage });
 
 const getCars = async (req, res) => {
   try {
-    const cars = await Car.find().populate('user', 'name email');
+    const cars = await Car.find();
     res.json(cars);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -48,14 +48,14 @@ const createCar = (req, res) => {
   uploadStream.end(req.file.buffer);
 };
 
-// New controller function
+// Get Car by Id
 const getCarById = async (req, res) => {
   const { id } = req.params;
-  console.log('Extracted ID:', id); // Log the extracted ID
+  console.log('Extracted ID:', id);
 
   try {
-    const car = await Car.findById(id).populate('user', 'name email');
-    console.log('Found Car:', car); // Log the retrieved car data
+    const car = await Car.findById(id).populate('user');
+    console.log('Found Car:', car);
     if (!car) {
       return res.status(404).json({ message: 'Car not found' });
     }
