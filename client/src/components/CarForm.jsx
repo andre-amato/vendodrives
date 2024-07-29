@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 // Component to handle car creation form
 const CarForm = ({ onSubmit }) => {
@@ -7,6 +7,7 @@ const CarForm = ({ onSubmit }) => {
   const [price, setPrice] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [photo, setPhoto] = useState(null);
+  const [submitted, setSubmitted] = useState(false); // Track submission status
 
   // Retrieve user ID from local storage
   const user = localStorage.getItem('userId'); // This will be used in carService
@@ -32,15 +33,22 @@ const CarForm = ({ onSubmit }) => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ensure that onSubmit is called with the correct data including user
-    onSubmit({ title, price, zipCode, photo, user });
-    // Clear the form fields
-    setTitle('');
-    setPrice('');
-    setZipCode('');
-    setPhoto(null);
+    try {
+      // Ensure that onSubmit is called with the correct data including user
+      await onSubmit({ title, price, zipCode, photo, user });
+      // Clear the form fields
+      setTitle('');
+      setPrice('');
+      setZipCode('');
+      setPhoto(null);
+      // Set submission status to true
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Error creating car:', error);
+      setSubmitted(false); // Optionally handle error state
+    }
   };
 
   return (
@@ -118,6 +126,12 @@ const CarForm = ({ onSubmit }) => {
           >
             Submit
           </button>
+          {/* Submission Status */}
+          {submitted && (
+            <p className='mt-4 text-green-500 font-semibold text-center'>
+              Your car is now available at VendoDrives!
+            </p>
+          )}
         </div>
       </form>
     </div>
