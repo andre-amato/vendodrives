@@ -18,6 +18,7 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
   };
 
   const isOnMainPage = location.pathname === '/main';
+  const isLoginPage = location.pathname === '/';
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -35,9 +36,16 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
               'invert(100%) sepia(0%) saturate(0%) hue-rotate(360deg) brightness(100%) contrast(100%)',
           }}
         />
-        <h1 className='text-3xl xs:text-4xl sm:text-3xl font-bold font-bebas'>
-          VendoDrives
-        </h1>
+        <div>
+          <h1 className='text-3xl xs:text-4xl sm:text-3xl font-bold font-bebas'>
+            VendoDrives
+          </h1>
+          {!isLoginPage && (
+            <p className='hidden lg:block text-lg font-medium'>
+              Affordable Wheels, Real Deals
+            </p>
+          )}
+        </div>
       </div>
       {showNavLinks && (
         <nav className='w-full sm:w-auto'>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import racingFlagLogin from '../assets/racing-flag-login.png'; // Import your image
+import racingFlagLogin from '../assets/racing-flag-login2.png'; // Import your image
 import Header from '../components/Header';
 
 const Login = () => {
@@ -67,9 +67,9 @@ const Login = () => {
         className='absolute inset-0 bg-gradient-to-b from-blue-200 t-blue-500'
         style={{
           backgroundImage: `url(${racingFlagLogin})`,
-          backgroundSize: '120px 120px',
+          backgroundSize: '500px 500px',
           backgroundRepeat: 'repeat',
-          filter: 'invert(100%) brightness(100%) contrast(60%)',
+          filter: 'invert(30%) brightness(100%) contrast(50%)',
         }}
       ></div>
       <div className='relative bg-white p-8 rounded-2xl shadow-md w-80 mt-8 z-10'>
