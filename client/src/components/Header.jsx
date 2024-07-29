@@ -25,17 +25,17 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
 
   return (
     <header className='bg-blue-600 text-white p-4 sm:p-6 flex flex-col sm:flex-row justify-between items-center sticky top-0 shadow-md z-30'>
-      <div className='flex items-center space-x-4 sm:space-x-6'>
+      <div className='flex items-center space-x-4 xs:space-x-6 sm:space-x-6'>
         <img
           src={racingFlag}
           alt='Racing Flag'
-          className='w-16 h-10 sm:w-24 sm:h-14'
+          className='w-24 h-14 xs:w-28 xs:h-16 sm:w-24 sm:h-14'
           style={{
             filter:
               'invert(100%) sepia(0%) saturate(0%) hue-rotate(360deg) brightness(100%) contrast(100%)',
           }}
         />
-        <h1 className='text-xl sm:text-3xl font-bold font-bebas'>
+        <h1 className='text-3xl xs:text-4xl sm:text-3xl font-bold font-bebas'>
           VendoDrives
         </h1>
       </div>
@@ -63,7 +63,6 @@ const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
                 >
                   Messages
                 </Link>
-                {/* Add the new button here */}
                 <Link
                   to='/user-cars'
                   className='py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
