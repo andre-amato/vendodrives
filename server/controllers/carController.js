@@ -38,8 +38,8 @@ const createCar = (req, res) => {
       console.log('Cloudinary upload result:', result);
 
       try {
-        // Retrieve user ID from the request body (instead of req.user.id if user not authenticated)
-        const userId = req.body.userId; // Extract user ID from request body
+        // Retrieve user ID from the request object (assuming user is added to req by middleware)
+        const userId = req.user.id;
 
         // Find the user
         const user = await User.findById(userId);
