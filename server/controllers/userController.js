@@ -45,4 +45,29 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+const updateUserCars = async (req, res) => {
+  const { userId, carId } = req.body; // Expect userId and carId in the request body
+
+  try {
+    // Validate user ID and car ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const car = await Car.findById(carId);
+    if (!car) {
+      return res.status(404).json({ message: 'Car not found' });
+    }
+
+    // Add car ID to the user's cars array
+    user.cars.push(carId);
+    await user.save();
+
+    res.status(200).json({ message: 'Car added to user successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { registerUser, loginUser, updateUserCars };

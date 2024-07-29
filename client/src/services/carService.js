@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:5001/cars';
 
+// Fetch all cars from the API
 export const fetchCars = async () => {
   try {
     const response = await fetch(API_URL);
@@ -9,10 +10,11 @@ export const fetchCars = async () => {
     return await response.json();
   } catch (error) {
     console.error('Error fetching cars:', error);
-    throw error;
+    throw error; // Re-throw the error for higher-level handling
   }
 };
 
+// Create a new car with provided details
 export const createCar = async (carDetails) => {
   const formData = new FormData();
   formData.append('title', carDetails.title);
@@ -33,6 +35,6 @@ export const createCar = async (carDetails) => {
     return await response.json();
   } catch (error) {
     console.error('Error creating car:', error);
-    throw error;
+    throw error; // Re-throw the error for higher-level handling
   }
 };

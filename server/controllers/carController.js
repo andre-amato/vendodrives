@@ -16,30 +16,42 @@ const getCars = async (req, res) => {
 };
 
 const createCar = (req, res) => {
+  console.log('createCar called');
+
   // Ensure req.file exists
   if (!req.file) {
+    console.error('No file uploaded');
     return res.status(400).json({ message: 'No file uploaded' });
   }
+
+  console.log('File uploaded:', req.file);
 
   // Cloudinary upload stream
   const uploadStream = cloudinary.uploader.upload_stream(
     { resource_type: 'auto' },
     async (error, result) => {
       if (error) {
+        console.error('Cloudinary upload error:', error);
         return res.status(500).json({ message: error.message });
       }
+
+      console.log('Cloudinary upload result:', result);
+
       try {
         const newCar = new Car({
           title: req.body.title,
           price: req.body.price,
           zipCode: req.body.zipCode,
           photo: result.secure_url,
-          user: req.user.id, // Associate car with logged-in user
         });
         const savedCar = await newCar.save();
+
+        console.log('Car saved:', savedCar);
+
         res.status(201).json(savedCar);
-      } catch (error) {
-        res.status(500).json({ message: error.message });
+      } catch (saveError) {
+        console.error('Error saving car:', saveError);
+        res.status(500).json({ message: saveError.message });
       }
     }
   );
