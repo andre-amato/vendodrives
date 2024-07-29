@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   updateUserCars,
+  getUserCars,
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -15,5 +16,8 @@ router.post('/login', loginUser);
 
 // Route to update user's cars list
 router.put('/update-cars', updateUserCars);
+
+// Route to get all cars for a specific user
+router.get('/:userId/cars', getUserCars);
 
 module.exports = router;

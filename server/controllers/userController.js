@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const Car = require('../models/car');
 
 // Register a new user
 const registerUser = async (req, res) => {
@@ -70,4 +71,24 @@ const updateUserCars = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, updateUserCars };
+// Fetch all cars for a specific user
+const getUserCars = async (req, res) => {
+  const { userId } = req.params; // Get userId from the request parameters
+
+  try {
+    // Find user by ID and populate the cars field
+    const user = await User.findById(userId).populate('cars');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Return the list of cars
+    res.json(user.cars);
+  } catch (error) {
+    console.error('Error fetching user cars:', error);
+    res.status(500).json({ message: 'Error fetching user cars', error });
+  }
+};
+
+module.exports = { registerUser, loginUser, updateUserCars, getUserCars };
