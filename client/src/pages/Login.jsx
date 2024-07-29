@@ -25,7 +25,8 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        navigate('/main');
+        localStorage.setItem('userId', data.user._id); // Store user ID
+        navigate('/main'); // Redirect to the main page
       } else {
         alert('Login failed: User does not exist or password is incorrect');
       }
@@ -50,7 +51,8 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        navigate('/main');
+        localStorage.setItem('userId', data.user._id); // Store user ID
+        navigate('/main'); // Redirect to the main page
       } else {
         alert('Registration failed: ' + (await response.json()).message);
       }

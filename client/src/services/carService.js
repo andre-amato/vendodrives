@@ -20,6 +20,7 @@ export const createCar = async (carDetails) => {
   formData.append('title', carDetails.title);
   formData.append('price', carDetails.price);
   formData.append('zipCode', carDetails.zipCode);
+  formData.append('userId', localStorage.getItem('userId')); // Add user ID
   if (carDetails.photo) {
     formData.append('photo', carDetails.photo);
   }
@@ -30,7 +31,10 @@ export const createCar = async (carDetails) => {
       body: formData,
     });
     if (!response.ok) {
-      throw new Error('Failed to create car');
+      const errorText = await response.text(); // Get error message from response
+      throw new Error(
+        `Failed to create car: ${response.status} ${response.statusText} - ${errorText}`
+      );
     }
     return await response.json();
   } catch (error) {
