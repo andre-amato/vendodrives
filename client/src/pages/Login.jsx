@@ -74,10 +74,12 @@ const Login = () => {
       ></div>
       <div className='relative z-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between lg:items-start lg:px-20 lg:py-12'>
         <div className='hidden lg:flex flex-col items-start space-y-6 bg-blue-600 text-white p-8 rounded-xl w-full lg:w-1/2'>
-          <h1 className='text-3xl font-medium'>
-            Affordable Wheels, Real Deals
-          </h1>
-          <h2 className='text-xl'>
+          <div className='bg-white text-blue-600 p-4 rounded-xl'>
+            <h1 className='text-3xl font-medium'>
+              Affordable Wheels, Real Deals
+            </h1>
+          </div>
+          <h2 className='text-xl mt-4'>
             Connect to buy and sell cheap cars in hard economic times!
           </h2>
           <ul className='list-disc pl-5 mb-6 text-lg'>
