@@ -1,8 +1,8 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import racingFlag from '../assets/racing-flag.png';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import HamburgerButton from './HamburguerButton'; // Import the new HamburgerButton component
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import racingFlag from '../assets/racing-flag.png';
+import HamburgerButton from './HamburguerButton';
 
 const Header = ({ showNavLinks = true, onSearch = () => {} }) => {
   const navigate = useNavigate();
