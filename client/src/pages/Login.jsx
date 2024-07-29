@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import racingFlagLogin from '../assets/racing-flag-login.png'; // Import your image
 import Header from '../components/Header';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState(''); // State for name
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false); // To toggle between login and registration
+  const [isRegistering, setIsRegistering] = useState(false);
 
-  // Handle user login
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -25,8 +25,8 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.user._id); // Store user ID
-        navigate('/main'); // Redirect to the main page
+        localStorage.setItem('userId', data.user._id);
+        navigate('/main');
       } else {
         alert('Login failed: User does not exist or password is incorrect');
       }
@@ -35,7 +35,6 @@ const Login = () => {
     }
   };
 
-  // Handle user registration
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -45,14 +44,14 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password }), // Include name in the request body
+        body: JSON.stringify({ name, email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.user._id); // Store user ID
-        navigate('/main'); // Redirect to the main page
+        localStorage.setItem('userId', data.user._id);
+        navigate('/main');
       } else {
         alert('Registration failed: ' + (await response.json()).message);
       }
@@ -62,14 +61,24 @@ const Login = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
+    <div className='relative flex flex-col items-center justify-center min-h-screen bg-gray-100'>
       <Header showNavLinks={false} /> {/* Header without nav links */}
-      <div className='bg-white p-8 rounded-2xl shadow-md w-80 mt-8'>
+      <div
+        className='absolute inset-0 bg-gray-200'
+        style={{
+          backgroundImage: `url(${racingFlagLogin})`,
+          backgroundSize: '120px 120px',
+          backgroundRepeat: 'repeat',
+          filter:
+            'invert(0%) sepia(100%) hue-rotate(200deg) brightness(50%) contrast(50%)',
+        }}
+      ></div>
+      <div className='relative bg-white p-8 rounded-2xl shadow-md w-80 mt-8 z-10'>
         <h2 className='text-2xl font-bold mb-6 text-center'>
           {isRegistering ? 'Register' : 'Login'}
         </h2>
         <form onSubmit={isRegistering ? handleRegister : handleLogin}>
-          {isRegistering && ( // Show name field only for registration
+          {isRegistering && (
             <div className='mb-4'>
               <label className='block text-gray-700'>Name</label>
               <input
