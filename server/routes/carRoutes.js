@@ -5,7 +5,7 @@ const {
   createCar,
   getCarById,
   deleteCar,
-} = require('../controllers/carController');
+} = require('../controllers/carController'); // Ensure this path is correct
 const multer = require('multer');
 
 const storage = multer.memoryStorage();

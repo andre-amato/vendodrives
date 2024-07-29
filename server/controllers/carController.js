@@ -1,11 +1,13 @@
 const Car = require('../models/car');
 const cloudinary = require('../config/cloudinary');
 const multer = require('multer');
+const User = require('../models/user'); // Ensure User model is imported
 
 // Setup multer for file upload
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+// Define controller functions
 const getCars = async (req, res) => {
   try {
     const cars = await Car.find();
@@ -18,7 +20,6 @@ const getCars = async (req, res) => {
 const createCar = (req, res) => {
   console.log('createCar called');
 
-  // Ensure req.file exists
   if (!req.file) {
     console.error('No file uploaded');
     return res.status(400).json({ message: 'No file uploaded' });
@@ -26,7 +27,6 @@ const createCar = (req, res) => {
 
   console.log('File uploaded:', req.file);
 
-  // Cloudinary upload stream
   const uploadStream = cloudinary.uploader.upload_stream(
     { resource_type: 'auto' },
     async (error, result) => {
@@ -38,15 +38,32 @@ const createCar = (req, res) => {
       console.log('Cloudinary upload result:', result);
 
       try {
+        // Retrieve user ID from the request object (assuming user is added to req by middleware)
+        const userId = req.user.id;
+
+        // Find the user
+        const user = await User.findById(userId);
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Create a new car
         const newCar = new Car({
           title: req.body.title,
           price: req.body.price,
           zipCode: req.body.zipCode,
           photo: result.secure_url,
+          user: userId, // Reference to user
         });
+
+        // Save the new car
         const savedCar = await newCar.save();
 
         console.log('Car saved:', savedCar);
+
+        // Add the new car's ID to the user's cars array
+        user.cars.push(savedCar._id);
+        await user.save();
 
         res.status(201).json(savedCar);
       } catch (saveError) {
@@ -56,11 +73,9 @@ const createCar = (req, res) => {
     }
   );
 
-  // Pipe the file buffer to Cloudinary
   uploadStream.end(req.file.buffer);
 };
 
-// Get Car by Id
 const getCarById = async (req, res) => {
   const { id } = req.params;
   console.log('Extracted ID:', id);
@@ -86,7 +101,6 @@ const deleteCar = async (req, res) => {
       return res.status(404).json({ message: 'Car not found' });
     }
 
-    // Ensure the logged-in user is the owner of the car
     if (car.user.toString() !== req.user.id) {
       return res.status(401).json({ message: 'User not authorized' });
     }
@@ -98,4 +112,4 @@ const deleteCar = async (req, res) => {
   }
 };
 
-module.exports = { getCars, createCar, getCarById, deleteCar, upload };
+module.exports = { getCars, createCar, getCarById, deleteCar };
