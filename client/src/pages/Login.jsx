@@ -64,13 +64,12 @@ const Login = () => {
     <div className='relative flex flex-col items-center justify-center min-h-screen bg-gray-100'>
       <Header showNavLinks={false} style={{ height: '80px' }} />
       <div
-        className='absolute inset-0 bg-gray-200'
+        className='absolute inset-0 bg-gradient-to-b from-blue-200 t-blue-500'
         style={{
           backgroundImage: `url(${racingFlagLogin})`,
           backgroundSize: '120px 120px',
           backgroundRepeat: 'repeat',
-          filter:
-            'invert(0%) sepia(100%) hue-rotate(200deg) brightness(80%) contrast(50%)',
+          filter: 'invert(100%) brightness(100%) contrast(60%)',
         }}
       ></div>
       <div className='relative bg-white p-8 rounded-2xl shadow-md w-80 mt-8 z-10'>
