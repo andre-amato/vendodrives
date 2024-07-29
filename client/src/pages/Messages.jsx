@@ -56,16 +56,49 @@ const messages = [
 ];
 
 const Messages = () => {
-  const [
-    messageList,
-    //setMessageList
-  ] = useState(messages);
+  const [messageList] = useState(messages);
 
   return (
     <div className='messages-container bg-gray-50 min-h-screen'>
       <Header />
       <main className='p-6'>
         <h2 className='text-3xl font-bold text-gray-800 mb-6'>Your Messages</h2>
+
+        {/* Form for writing messages */}
+        <div className='mb-6'>
+          <form className='bg-white p-6 rounded-lg shadow-md'>
+            <div className='mb-4'>
+              <label htmlFor='user' className='block text-gray-700 mb-2'>
+                User:
+              </label>
+              <select
+                id='user'
+                className='w-full p-2 border border-gray-300 rounded-lg'
+              >
+                <option value=''>Select User</option>
+                <option value='jonas'>Jonas</option>
+                <option value='erico'>Erico</option>
+              </select>
+            </div>
+            <div className='mb-4'>
+              <label htmlFor='message' className='block text-gray-700 mb-2'>
+                Message:
+              </label>
+              <input
+                type='text'
+                id='message'
+                className='w-full p-2 border border-gray-300 rounded-lg'
+              />
+            </div>
+            <button
+              type='submit'
+              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg'
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+
         {messageList.length > 0 ? (
           <ul className='message-list space-y-6'>
             {messageList.map((message) => (
