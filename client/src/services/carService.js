@@ -20,7 +20,11 @@ export const createCar = async (carDetails) => {
   formData.append('title', carDetails.title);
   formData.append('price', carDetails.price);
   formData.append('zipCode', carDetails.zipCode);
-  formData.append('userId', localStorage.getItem('userId')); // Add user ID
+  const userId = localStorage.getItem('userId');
+  if (!userId) {
+    throw new Error('User not logged in');
+  }
+  formData.append('userId', userId); // Add user ID
   if (carDetails.photo) {
     formData.append('photo', carDetails.photo);
   }
