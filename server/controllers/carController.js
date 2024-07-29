@@ -17,6 +17,7 @@ const getCars = async (req, res) => {
   }
 };
 
+// creating Car
 const createCar = (req, res) => {
   console.log('createCar called');
 
@@ -38,8 +39,8 @@ const createCar = (req, res) => {
       console.log('Cloudinary upload result:', result);
 
       try {
-        // Retrieve user ID from the request object (assuming user is added to req by middleware)
-        const userId = req.user.id;
+        // Retrieve user ID from the request body
+        const userId = req.body.user;
 
         // Find the user
         const user = await User.findById(userId);
@@ -76,6 +77,7 @@ const createCar = (req, res) => {
   uploadStream.end(req.file.buffer);
 };
 
+//get car by Id
 const getCarById = async (req, res) => {
   const { id } = req.params;
   console.log('Extracted ID:', id);
@@ -92,22 +94,26 @@ const getCarById = async (req, res) => {
   }
 };
 
+//delete car
 const deleteCar = async (req, res) => {
   const { id } = req.params;
+  console.log('Received ID for deletion:', id); // Log the ID to verify it's received correctly
 
   try {
-    const car = await Car.findById(id);
-    if (!car) {
+    if (!id) {
+      return res.status(400).json({ message: 'Car ID is required' });
+    }
+
+    // Find and delete the car by ID
+    const result = await Car.deleteOne({ _id: id });
+
+    if (result.deletedCount === 0) {
       return res.status(404).json({ message: 'Car not found' });
     }
 
-    if (car.user.toString() !== req.user.id) {
-      return res.status(401).json({ message: 'User not authorized' });
-    }
-
-    await car.remove();
     res.json({ message: 'Car removed' });
   } catch (error) {
+    console.error('Error deleting car:', error);
     res.status(500).json({ message: error.message });
   }
 };

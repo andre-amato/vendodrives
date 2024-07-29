@@ -29,6 +29,16 @@ const UserCars = () => {
     }
   }, [userId]);
 
+  const handleDelete = async (carId) => {
+    try {
+      await axios.delete(`http://localhost:5001/cars/${carId}`);
+      setCars(cars.filter((car) => car._id !== carId));
+    } catch (err) {
+      setError('Error deleting car');
+      console.error(err);
+    }
+  };
+
   if (error) return <p>{error}</p>;
 
   return (
@@ -52,6 +62,12 @@ const UserCars = () => {
                     className='w-full h-auto mt-2'
                   />
                 )}
+                <button
+                  onClick={() => handleDelete(car._id)}
+                  className='mt-2 bg-red-500 text-white py-1 px-4 rounded'
+                >
+                  Delete
+                </button>
               </div>
             ))
           )}

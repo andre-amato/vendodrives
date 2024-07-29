@@ -1,3 +1,4 @@
+// carService.js
 const API_URL = 'http://localhost:5001/cars';
 
 // Fetch all cars from the API
@@ -20,11 +21,11 @@ export const createCar = async (carDetails) => {
   formData.append('title', carDetails.title);
   formData.append('price', carDetails.price);
   formData.append('zipCode', carDetails.zipCode);
-  const userId = localStorage.getItem('userId');
-  if (!userId) {
+  const user = localStorage.getItem('userId'); // Retrieve user ID
+  if (!user) {
     throw new Error('User not logged in');
   }
-  formData.append('userId', userId); // Add user ID
+  formData.append('user', user); // Update field name to 'user'
   if (carDetails.photo) {
     formData.append('photo', carDetails.photo);
   }

@@ -9,7 +9,7 @@ const CarForm = ({ onSubmit }) => {
   const [photo, setPhoto] = useState(null);
 
   // Retrieve user ID from local storage
-  const userId = localStorage.getItem('userId');
+  const user = localStorage.getItem('userId'); // This will be used in carService
 
   // Handle title input change
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -34,8 +34,8 @@ const CarForm = ({ onSubmit }) => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ensure that onSubmit is called with the correct data including userId
-    onSubmit({ title, price, zipCode, photo, userId });
+    // Ensure that onSubmit is called with the correct data including user
+    onSubmit({ title, price, zipCode, photo, user });
     // Clear the form fields
     setTitle('');
     setPrice('');
