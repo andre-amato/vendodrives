@@ -9,6 +9,7 @@ Vendodrives is a web application for managing and viewing messages related to ve
 - Filter cars by localization, price, and other criteria
 - View received messages
 - Send new messages
+- Manage your posted cars (view, edit, and delete)
 - Responsive design with optimized layout for mobile and desktop
 
 ## Technologies Used
@@ -56,6 +57,13 @@ Price: Enter the price of the car.
 Zip Code: Enter the zip code where the car is located.
 Photo Upload: Upload a photo of the car using Cloudinary.
 
+My Cars
+React Page for managing the cars posted by the user, including:
+
+View: See all cars posted by the user.
+Edit: Modify details of a posted car.
+Delete: Remove a car listing.
+
 **Usage**
 Viewing Messages
 Received messages are displayed on the right side (or below on mobile) with a purple border.
@@ -72,6 +80,12 @@ Posting a Car
 Navigate to the "Car Form" section.
 Fill in the details of the car, including title, price, zip code, and upload an image using Cloudinary.
 Submit the form to post the car listing.
+
+Managing Your Cars
+Navigate to the "My Cars" section.
+View a list of all cars you have posted.
+Use the edit option to modify car details.
+Use the delete option to remove a car listing. Note that this action is permanent and cannot be undone.
 
 **Viewing and Filtering Cars**
 View all posted cars on the main page.
@@ -101,8 +115,17 @@ JWT**
 
 **Photos**
 <img width="1512" alt="image" src="https://github.com/user-attachments/assets/134c3ea9-12c3-419f-9708-7ef1922f3d5b">
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/efe2553b-3f06-4197-ba72-06fdb0bbfa10">
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/dd2a4d4d-7ded-4a77-80a9-e0f884fe67f2">
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/80fb2fc6-201a-4242-a547-ea991fc92e5f">
+
+
 
 **SM View**
+
 <img width="357" alt="image" src="https://github.com/user-attachments/assets/5237b73e-89d5-4f52-b0ff-7227a9f2f4a3">
+<img width="345" alt="image" src="https://github.com/user-attachments/assets/009e1efd-365a-4c1f-8a4d-3d3c6fa0216d">
+<img width="356" alt="image" src="https://github.com/user-attachments/assets/3bffbdb5-fe1f-4ae7-8ed0-1d50cc946c94">
+<img width="346" alt="image" src="https://github.com/user-attachments/assets/c8be10be-f4c4-4b50-8cbc-940470959e3c">
 
 
