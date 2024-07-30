@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Header from '../components/Header'; // Adjust the import path as needed
+import Header from '../components/Header';
 
 const UserCars = () => {
   const [cars, setCars] = useState([]);
   const [error, setError] = useState(null);
 
   // Retrieve userId from local storage or any other state management
-  const userId = localStorage.getItem('userId'); // Ensure this is set during login
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchUserCars = async () => {
@@ -62,12 +62,17 @@ const UserCars = () => {
                     className='w-full h-auto mt-2'
                   />
                 )}
-                <button
-                  onClick={() => handleDelete(car._id)}
-                  className='mt-2 bg-red-500 text-white py-1 px-4 rounded'
-                >
-                  Delete
-                </button>
+                <div className='flex justify-center mt-4 space-x-4'>
+                  <button
+                    onClick={() => handleDelete(car._id)}
+                    className='bg-red-500 text-white py-2 px-4 rounded-full'
+                  >
+                    Delete
+                  </button>
+                  <button className='bg-green-500 text-white py-2 px-4 rounded-full'>
+                    Edit
+                  </button>
+                </div>
               </div>
             ))
           )}
