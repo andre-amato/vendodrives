@@ -73,6 +73,7 @@ const Login = () => {
         }}
       ></div>
       <div className='relative z-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between lg:items-start lg:px-20 lg:py-12'>
+        {/* Blue box for larger screens */}
         <div className='hidden lg:flex flex-col items-start space-y-6 bg-blue-600 text-white p-8 rounded-xl w-full lg:w-1/2'>
           <div className='bg-white text-blue-600 p-4 rounded-xl'>
             <h1 className='text-3xl font-medium'>
@@ -91,6 +92,10 @@ const Login = () => {
             Join the VendoDrives community today and drive your dream car at a
             dream price!
           </p>
+        </div>
+        {/* White box with blue letters for smaller screens */}
+        <div className='lg:hidden bg-white text-blue-600 p-4 rounded-xl mt-6 mb-8'>
+          <h1 className='text-xl font-medium'>Affordable Wheels, Real Deals</h1>
         </div>
         <div className='relative bg-white p-8 rounded-2xl shadow-md w-80 mt-8 lg:mt-0 lg:w-96 lg:ml-8'>
           <h2 className='text-2xl font-bold mb-6 text-center'>
