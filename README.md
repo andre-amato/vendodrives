@@ -103,15 +103,16 @@ Push to the branch: git push origin feature/your-feature-name.
 Open a pull request to the main branch.
 
 
-**Acknowledgements
-React
-Tailwind CSS
-Express
-Cloudinary
-Leaflet
-OpenStreetMap
-Node.js
-JWT**
+****Acknowledgements**
+
+- React
+- Tailwind CSS
+- Express
+- Cloudinary
+- Leaflet
+- OpenStreetMap
+- Node.js
+- JWT
 
 **Photos**
 <img width="1512" alt="image" src="https://github.com/user-attachments/assets/134c3ea9-12c3-419f-9708-7ef1922f3d5b">
