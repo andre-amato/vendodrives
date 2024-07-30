@@ -56,7 +56,8 @@ const initialMessages = [
 ];
 
 const Messages = () => {
-  const [messageList, setMessageList] = useState(initialMessages);
+  const [messageList] = useState(initialMessages);
+  const [sentMessages, setSentMessages] = useState([]);
   const [user, setUser] = useState('');
   const [messageContent, setMessageContent] = useState('');
 
@@ -74,15 +75,24 @@ const Messages = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newMessage = {
-      id: messageList.length + 1,
+      id: sentMessages.length + 1,
       name: user,
       contact: getUserContact(user),
       time: new Date().toISOString(),
       content: messageContent,
     };
-    setMessageList([newMessage, ...messageList]);
+    setSentMessages([newMessage, ...sentMessages]);
     setUser('');
     setMessageContent('');
+  };
+
+  const handleDeleteMessage = (id, type) => {
+    if (type === 'sent') {
+      setSentMessages(sentMessages.filter((message) => message.id !== id));
+    } else {
+      // For received messages, assuming this would be similar logic
+      // You might want to handle this differently based on your requirements
+    }
   };
 
   return (
@@ -135,31 +145,93 @@ const Messages = () => {
           </form>
         </div>
 
-        {messageList.length > 0 ? (
-          <ul className='message-list space-y-6'>
-            {messageList.map((message) => (
-              <li
-                key={message.id}
-                className='message-item bg-white p-4 rounded-lg shadow'
-              >
-                <div className='message-header flex justify-between items-center mb-2'>
-                  <div className='sender-info'>
-                    <p className='font-bold text-lg text-gray-900'>
-                      {message.name}
-                    </p>
-                    <p className='text-gray-500 text-sm'>{message.contact}</p>
-                  </div>
-                  <p className='text-gray-400 text-sm'>{message.time}</p>
-                </div>
-                <p className='message-content text-gray-700'>
-                  {message.content}
-                </p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className='text-gray-700'>No messages found.</p>
-        )}
+        <div className='flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6'>
+          {/* Sent Messages Section */}
+          <div className='flex-1 lg:order-1'>
+            <h3 className='text-2xl font-bold text-gray-800 mb-4'>
+              Sent Messages ({sentMessages.length})
+            </h3>
+            <div className='border-l-4 border-blue-500 p-4'>
+              {sentMessages.length > 0 ? (
+                <ul className='message-list space-y-6'>
+                  {sentMessages.map((message) => (
+                    <li
+                      key={message.id}
+                      className='message-item bg-white p-4 rounded-lg shadow relative'
+                    >
+                      <button
+                        onClick={() => handleDeleteMessage(message.id, 'sent')}
+                        className='absolute top-2 right-2 text-red-500 hover:text-red-700'
+                      >
+                        &times;
+                      </button>
+                      <div className='message-header flex justify-between items-center mb-2'>
+                        <div className='sender-info'>
+                          <p className='font-bold text-lg text-gray-900'>
+                            {message.name}
+                          </p>
+                          <p className='text-gray-500 text-sm'>
+                            {message.contact}
+                          </p>
+                        </div>
+                        <p className='text-gray-400 text-sm'>{message.time}</p>
+                      </div>
+                      <p className='message-content text-gray-700'>
+                        {message.content}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className='text-gray-700'>No sent messages found.</p>
+              )}
+            </div>
+          </div>
+
+          {/* Received Messages Section */}
+          <div className='flex-1 lg:order-2'>
+            <h3 className='text-2xl font-bold text-gray-800 mb-4'>
+              Received Messages ({messageList.length})
+            </h3>
+            <div className='border-l-4 border-purple-500 p-4'>
+              {messageList.length > 0 ? (
+                <ul className='message-list space-y-6'>
+                  {messageList.map((message) => (
+                    <li
+                      key={message.id}
+                      className='message-item bg-white p-4 rounded-lg shadow relative'
+                    >
+                      <button
+                        onClick={() =>
+                          handleDeleteMessage(message.id, 'received')
+                        }
+                        className='absolute top-2 right-2 text-red-500 hover:text-red-700'
+                      >
+                        &times;
+                      </button>
+                      <div className='message-header flex justify-between items-center mb-2'>
+                        <div className='sender-info'>
+                          <p className='font-bold text-lg text-gray-900'>
+                            {message.name}
+                          </p>
+                          <p className='text-gray-500 text-sm'>
+                            {message.contact}
+                          </p>
+                        </div>
+                        <p className='text-gray-400 text-sm'>{message.time}</p>
+                      </div>
+                      <p className='message-content text-gray-700'>
+                        {message.content}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className='text-gray-700'>No received messages found.</p>
+              )}
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );
