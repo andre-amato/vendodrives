@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../components/Header';
 
-const messages = [
+const initialMessages = [
   {
     id: 1,
     name: 'John Doe',
@@ -56,7 +56,34 @@ const messages = [
 ];
 
 const Messages = () => {
-  const [messageList] = useState(messages);
+  const [messageList, setMessageList] = useState(initialMessages);
+  const [user, setUser] = useState('');
+  const [messageContent, setMessageContent] = useState('');
+
+  const getUserContact = (username) => {
+    switch (username) {
+      case 'Jonas':
+        return '+9876543210';
+      case 'Erico':
+        return 'erico.contact@example.com';
+      default:
+        return 'N/A';
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newMessage = {
+      id: messageList.length + 1,
+      name: user,
+      contact: getUserContact(user),
+      time: new Date().toISOString(),
+      content: messageContent,
+    };
+    setMessageList([newMessage, ...messageList]);
+    setUser('');
+    setMessageContent('');
+  };
 
   return (
     <div className='messages-container bg-gray-50 min-h-screen'>
@@ -66,7 +93,10 @@ const Messages = () => {
 
         {/* Form for writing messages */}
         <div className='mb-6'>
-          <form className='bg-white p-6 rounded-lg shadow-md'>
+          <form
+            className='bg-white p-6 rounded-lg shadow-md'
+            onSubmit={handleSubmit}
+          >
             <div className='mb-4'>
               <label htmlFor='user' className='block text-gray-700 mb-2'>
                 User:
@@ -74,10 +104,13 @@ const Messages = () => {
               <select
                 id='user'
                 className='w-full p-2 border border-gray-300 rounded-lg'
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+                required
               >
                 <option value=''>Select User</option>
-                <option value='jonas'>Jonas</option>
-                <option value='erico'>Erico</option>
+                <option value='Jonas'>Jonas</option>
+                <option value='Erico'>Erico</option>
               </select>
             </div>
             <div className='mb-4'>
@@ -88,6 +121,9 @@ const Messages = () => {
                 type='text'
                 id='message'
                 className='w-full p-2 border border-gray-300 rounded-lg'
+                value={messageContent}
+                onChange={(e) => setMessageContent(e.target.value)}
+                required
               />
             </div>
             <button
