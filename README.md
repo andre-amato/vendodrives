@@ -36,31 +36,6 @@ Vendodrives is a web application for managing and viewing messages related to ve
 3. Start the development server:
    npm start
 
-**Project Structure**
-   vendodrives/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   └── ...
-│   ├── App.jsx
-│   ├── index.jsx
-│   └── ...
-├── server/
-│   ├── models/
-│   │   └── ...
-│   ├── routes/
-│   │   └── ...
-│   ├── controllers/
-│   │   └── ...
-│   └── ...
-├── tailwind.config.js
-├── postcss.config.js
-├── package.json
-├── README.md
-└── ...
 **Components**
 Header
 Displays the header section of the application.
@@ -123,3 +98,11 @@ Leaflet
 OpenStreetMap
 Node.js
 JWT**
+
+**Photos**
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/134c3ea9-12c3-419f-9708-7ef1922f3d5b">
+
+**SM View**
+<img width="357" alt="image" src="https://github.com/user-attachments/assets/5237b73e-89d5-4f52-b0ff-7227a9f2f4a3">
+
+
