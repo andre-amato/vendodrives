@@ -17,7 +17,7 @@ Vendodrives is a web application for managing and viewing messages related to ve
 - React + Vite
 - Tailwind CSS
 - Express
-- MongoDb
+- MongoDB
 - Node.js
 - Cloudinary
 - Leaflet
