@@ -14,13 +14,14 @@ Vendodrives is a web application for managing and viewing messages related to ve
 
 ## Technologies Used
 
-- React
+- React + Vite
 - Tailwind CSS
 - Express
+- MongoDb
+- Node.js
 - Cloudinary
 - Leaflet
 - OpenStreetMap
-- Node.js
 - JWT (JSON Web Token)
 
 ## Installation
