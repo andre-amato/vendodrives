@@ -32,9 +32,22 @@ Vendodrives is a web application for managing and viewing messages related to ve
    cd vendodrives
    
 2. Install the dependencies:
-   npm install
+   
+   - Running the client:
+   cd client
+   npm i
+   npm run dev
 
-3. Start the development server:
+   - Running the server:
+   cd server
+   npm i
+
+   *create an .env file following the example.env file()*
+   
+   node server.js
+     
+
+4. Start the development server:
    npm start
 
 **Components**
