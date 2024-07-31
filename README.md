@@ -34,12 +34,17 @@ Vendodrives is a web application for managing and viewing messages related to ve
 2. Install the dependencies:
    
    - Running the client:
+     
    cd client
+   
    npm i
+   
    npm run dev
 
    - Running the server:
+     
    cd server
+   
    npm i
 
    *create an .env file following the example.env file()*
