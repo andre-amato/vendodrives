@@ -107,24 +107,26 @@ export const getCarById = async (req: Request, res: Response): Promise<void> => 
 };
 
 //delete car
-const deleteCar = async (req, res) => {
+export const deleteCar = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   console.log('Received ID for deletion:', id); // Log the ID to verify it's received correctly
 
   try {
     if (!id) {
-      return res.status(400).json({ message: 'Car ID is required' });
+      res.status(400).json({ message: 'Car ID is required' });
+      return;
     }
 
     // Find and delete the car by ID
     const result = await Car.deleteOne({ _id: id });
 
     if (result.deletedCount === 0) {
-      return res.status(404).json({ message: 'Car not found' });
+      res.status(404).json({ message: 'Car not found' });
+      return;
     }
 
     res.json({ message: 'Car removed' });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error deleting car:', error);
     res.status(500).json({ message: error.message });
   }
