@@ -1,7 +1,15 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose, { Document, Schema, Model } from 'mongoose';
+import bcrypt from 'bcrypt';
 
-const UserSchema = new mongoose.Schema({
+export interface UserInterface extends Document {
+  name: string;
+  email: string;
+  password: string;
+  cars: mongoose.Types.ObjectId[];
+  comparePassword(password: string): Promise<boolean>;
+}
+
+const userSchema: Schema<UserInterface> = new Schema({
   name: {
     type: String,
     required: true,
@@ -27,7 +35,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Hash the user's password before saving the user model
-UserSchema.pre('save', async function (next) {
+userSchema.pre<UserInterface>('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
   }
@@ -42,10 +50,10 @@ UserSchema.pre('save', async function (next) {
 });
 
 // Method to compare the password
-UserSchema.methods.comparePassword = async function (password) {
+userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model('User', UserSchema);
+const User: Model<UserInterface> = mongoose.model<UserInterface>('User', userSchema);
 
-module.exports = User;
+export default User;
