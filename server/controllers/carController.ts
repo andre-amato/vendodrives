@@ -87,19 +87,21 @@ export const createCar = async (req: MulterRequest, res: Response): Promise<void
   uploadStream.end(req.file.buffer);
 };
 
-//get car by Id
-const getCarById = async (req, res) => {
+// GET car by Id
+export const getCarById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   console.log('Extracted ID:', id);
 
   try {
-    const car = await Car.findById(id).populate('user');
+    const car: CarInterface | null = await Car.findById(id).populate('user');
     console.log('Found Car:', car);
     if (!car) {
-      return res.status(404).json({ message: 'Car not found' });
+      res.status(404).json({ message: 'Car not found' });
+      return;
     }
     res.json(car);
-  } catch (error) {
+  } catch (error: any) {
+    console.error('Error finding car:', error);
     res.status(500).json({ message: error.message });
   }
 };
