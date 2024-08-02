@@ -1,6 +1,7 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
+import mongoose, { Document, Schema, Model, Types } from 'mongoose';
 
 export interface CarInterface extends Document {
+  _id: Types.ObjectId;
   title: string;
   price: number;
   zipCode: string;

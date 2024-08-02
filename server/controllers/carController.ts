@@ -39,22 +39,24 @@ export const createCar = async (req: MulterRequest, res: Response): Promise<void
 
   const uploadStream = cloudinary.uploader.upload_stream(
     { resource_type: 'auto' },
-    async (error, result) => {
+    async (error: any, result: any) => {
       if (error) {
         console.error('Cloudinary upload error:', error);
-        return res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
+        return;
       }
 
       console.log('Cloudinary upload result:', result);
 
       try {
         // Retrieve user ID from the request body
-        const userId = req.body.user;
+        const userId: Types.ObjectId = req.body.user;
 
         // Find the user
-        const user = await User.findById(userId);
+        const user: UserInterface | null = await User.findById(userId);
         if (!user) {
-          return res.status(404).json({ message: 'User not found' });
+          res.status(404).json({ message: 'User not found' });
+          return;
         }
 
         // Create a new car
@@ -76,13 +78,12 @@ export const createCar = async (req: MulterRequest, res: Response): Promise<void
         await user.save();
 
         res.status(201).json(savedCar);
-      } catch (saveError) {
+      } catch (saveError: any) {
         console.error('Error saving car:', saveError);
         res.status(500).json({ message: saveError.message });
       }
     }
   );
-
   uploadStream.end(req.file.buffer);
 };
 
