@@ -2,12 +2,17 @@ import { Request, Response } from 'express';
 import multer from 'multer';
 import { Document, Types } from 'mongoose';
 import { Car, CarInterface } from '../models/car';
-import User, { UserInterface } from '../models/user';
+import { User, UserInterface } from '../models/user';
 import cloudinary from '../config/cloudinary';
 
 // Setup multer for file upload
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+
+// Extending Request interface to include file property
+interface MulterRequest extends Request {
+  file: Express.Multer.File;
+}
 
 // Define controller functions
 // GET all Cars
@@ -20,13 +25,14 @@ export const getCars = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// creating Car
-const createCar = (req, res) => {
+// POST a new car
+export const createCar = async (req: MulterRequest, res: Response): Promise<void> => {
   console.log('createCar called');
 
   if (!req.file) {
     console.error('No file uploaded');
-    return res.status(400).json({ message: 'No file uploaded' });
+    res.status(400).json({ message: 'No file uploaded' });
+    return;
   }
 
   console.log('File uploaded:', req.file);
