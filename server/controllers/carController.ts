@@ -1,3 +1,7 @@
+// Typescript specific imports
+import { Request, Response }  from 'express';
+import { Document } from 'mongoose';
+
 const Car = require('../models/car');
 const cloudinary = require('../config/cloudinary');
 const multer = require('multer');
