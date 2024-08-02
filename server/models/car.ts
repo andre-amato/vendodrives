@@ -16,6 +16,6 @@ const carSchema: Schema<CarInterface> = new Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to User
 });
 
-const Car: Model<CarInterface> = mongoose.model<CarInterface>('Car', carSchema);
+export const Car: Model<CarInterface> = mongoose.model<CarInterface>('Car', carSchema);
 
 module.exports = Car;

@@ -1,22 +1,21 @@
-// Typescript specific imports
-import { Request, Response }  from 'express';
-import { Document } from 'mongoose';
-
-const Car = require('../models/car');
-const cloudinary = require('../config/cloudinary');
-const multer = require('multer');
-const User = require('../models/user'); // Ensure User model is imported
+import { Request, Response } from 'express';
+import multer from 'multer';
+import { Document, Types } from 'mongoose';
+import { Car, CarInterface } from '../models/car';
+import User, { UserInterface } from '../models/user';
+import cloudinary from '../config/cloudinary';
 
 // Setup multer for file upload
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Define controller functions
-const getCars = async (req, res) => {
+// GET all Cars
+export const getCars = async (req: Request, res: Response): Promise<void> => {
   try {
-    const cars = await Car.find();
+    const cars: CarInterface[] = await Car.find();
     res.json(cars);
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
