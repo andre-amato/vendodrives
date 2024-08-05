@@ -132,5 +132,3 @@ export const deleteCar = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: error.message });
   }
 };
-
-module.exports = { getCars, createCar, getCarById, deleteCar };
