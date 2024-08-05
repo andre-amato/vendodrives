@@ -23,25 +23,27 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
 };
 
 // Login user
-const loginUser = async (req, res) => {
+export const loginUser = async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user: UserInterface | null = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: 'Invalid email or password' });
+      res.status(400).json({ message: 'Invalid email or password' });
+      return;
     }
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch: boolean = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid email or password' });
+      res.status(400).json({ message: 'Invalid email or password' });
+      return;
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
       expiresIn: '1h',
     });
     res.json({ message: 'Login successful', token, user });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
