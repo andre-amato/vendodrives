@@ -1,6 +1,7 @@
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
-const Car = require('../models/car');
+import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+import { User, UserInterface } from '../models/user';
+import { Car, CarInterface } from '../models/car';
 
 // Register a new user
 const registerUser = async (req, res) => {

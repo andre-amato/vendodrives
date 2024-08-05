@@ -4,6 +4,7 @@ import { Document, Types } from 'mongoose';
 import { Car, CarInterface } from '../models/car';
 import { User, UserInterface } from '../models/user';
 import cloudinary from '../config/cloudinary';
+cloudinary.cloudinary_js_config
 
 // Setup multer for file upload
 const storage = multer.memoryStorage();
