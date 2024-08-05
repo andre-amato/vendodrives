@@ -76,23 +76,22 @@ export const updateUserCars = async (req: Request, res: Response): Promise<void>
 };
 
 // Fetch all cars for a specific user
-const getUserCars = async (req, res) => {
+export const getUserCars = async (req: Request, res: Response): Promise<void> => {
   const { userId } = req.params; // Get userId from the request parameters
 
   try {
     // Find user by ID and populate the cars field
-    const user = await User.findById(userId).populate('cars');
+    const user: UserInterface | null = await User.findById(userId).populate('cars');
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: 'User not found' });
+      return;
     }
 
     // Return the list of cars
     res.json(user.cars);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching user cars:', error);
     res.status(500).json({ message: 'Error fetching user cars', error });
   }
 };
-
-module.exports = { registerUser, loginUser, updateUserCars, getUserCars };
