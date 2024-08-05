@@ -4,21 +4,20 @@ import { User, UserInterface } from '../models/user';
 import { Car, CarInterface } from '../models/car';
 
 // Register a new user
-const registerUser = async (req, res) => {
+export const registerUser = async (req: Request, res: Response): Promise<void> => {
   const { name, email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser: UserInterface | null = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already exists' });
+      res.status(400).json({ message: 'Email already exists' });
+      return;
     }
 
     const newUser = new User({ name, email, password });
-    const savedUser = await newUser.save();
-    res
-      .status(201)
-      .json({ message: 'User registered successfully', user: savedUser });
-  } catch (error) {
+    const savedUser: UserInterface = await newUser.save();
+    res.status(201).json({ message: 'User registered successfully', user: savedUser });
+  } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
 };
