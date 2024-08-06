@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
+import mongoose, { Document, Schema, Model, CallbackError } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 export interface UserInterface extends Document {
@@ -45,7 +45,7 @@ userSchema.pre<UserInterface>('save', async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
-    next(error);
+    next(error as CallbackError);
   }
 });
 
