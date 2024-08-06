@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import multer from 'multer';
 import { Document, Types } from 'mongoose';
-import { Car, CarInterface } from '../models/car';
+import Car, { CarInterface } from '../models/car';
 import { User, UserInterface } from '../models/user';
 import cloudinary from '../config/cloudinary';
-cloudinary.cloudinary_js_config
 
 // Setup multer for file upload
 const storage = multer.memoryStorage();
@@ -107,7 +106,7 @@ export const getCarById = async (req: Request, res: Response): Promise<void> => 
   }
 };
 
-//delete car
+// DELETE car
 export const deleteCar = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   console.log('Received ID for deletion:', id); // Log the ID to verify it's received correctly
