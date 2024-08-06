@@ -111,6 +111,7 @@ const Login: React.FC = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  data-cy="register-name"
                 />
               </div>
             )}
@@ -122,6 +123,7 @@ const Login: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                data-cy="login-email"
               />
             </div>
             <div className="mb-6">
@@ -132,11 +134,13 @@ const Login: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                data-cy="login-password"
               />
             </div>
             <button
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+              data-cy="login-submit"
             >
               {isRegistering ? "Register" : "Login"}
             </button>
@@ -144,6 +148,7 @@ const Login: React.FC = () => {
           <button
             onClick={() => setIsRegistering(!isRegistering)}
             className="mt-4 text-blue-500 hover:underline"
+            data-cy="toggle-register"
           >
             {isRegistering
               ? "Already have an account? Login"
