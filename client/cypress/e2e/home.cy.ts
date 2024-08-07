@@ -21,13 +21,24 @@ describe("E2E tests", () => {
     cy.url().should("include", "/main");
   });
 
-  it("should create a car successfully", () => {
+  it("should create two cars successfully", () => {
     cy.visit("/main");
     cy.url().should("include", "/main");
 
     cy.get("[data-cy=car-name]").type("test");
     cy.get("[data-cy=car-price]").type("5000");
     cy.get("[data-cy=car-zipcode]").type("08080");
+    cy.get("[data-cy=car-image]").attachFile("test.jpeg");
+
+    cy.intercept("POST", "http://localhost:5001/cars").as("createCar");
+
+    cy.get("[data-cy=car-submit]").click();
+
+    cy.wait("@createCar").its("response.statusCode").should("equal", 201);
+
+    cy.get("[data-cy=car-name]").type("test2");
+    cy.get("[data-cy=car-price]").type("1000");
+    cy.get("[data-cy=car-zipcode]").type("08210");
     cy.get("[data-cy=car-image]").attachFile("test.jpeg");
 
     cy.intercept("POST", "http://localhost:5001/cars").as("createCar");
@@ -55,6 +66,25 @@ describe("E2E tests", () => {
         expect(interception.response.statusCode).to.equal(200);
       }
     });
+  });
+  it("should visit a car details page successfully", () => {
+    cy.visit("/main");
+    cy.intercept("GET", "http://localhost:5001/cars/*").as("getCarDetails");
+    cy.get("[data-cy=car-card]").first().click();
+    cy.wait("@getCarDetails").its("response.statusCode").should("equal", 200);
+    cy.url().should("include", "/car-details/");
+  });
+
+  it("should contain name, price, zipcode, image and map of a car", () => {
+    cy.visit("/main");
+    cy.intercept("GET", "http://localhost:5001/cars/*").as("getCarDetails");
+    cy.get("[data-cy=car-card]").first().click();
+    cy.url().should("include", "/car-details/");
+    cy.get("h1").should("not.be.empty");
+    cy.get("p").contains("Price:").should("exist");
+    cy.get("p").contains("Zip Code:").should("exist");
+    cy.get("img").should("have.attr", "src").and("not.be.empty");
+    cy.get(".leaflet-container").should("be.visible");
   });
 
   it("should logout successfully", () => {

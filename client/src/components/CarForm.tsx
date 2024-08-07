@@ -115,6 +115,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
                 onChange={handlePhotoChange}
                 className="absolute opacity-0 w-full h-full cursor-pointer"
                 id="photo-upload"
+                required
                 data-cy="car-image"
               />
               <label
