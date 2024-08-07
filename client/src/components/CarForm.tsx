@@ -76,6 +76,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
               onChange={handleTitleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
               required
+              data-cy="car-name"
             />
           </div>
           {/* Price Input */}
@@ -88,6 +89,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
               placeholder="€0.00"
               required
+              data-cy="car-price"
             />
           </div>
           {/* Zip Code Input */}
@@ -101,6 +103,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
               placeholder="Enter Zip Code"
               maxLength={10}
               required
+              data-cy="car-zipcode"
             />
           </div>
           {/* Photo Upload */}
@@ -112,6 +115,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
                 onChange={handlePhotoChange}
                 className="absolute opacity-0 w-full h-full cursor-pointer"
                 id="photo-upload"
+                data-cy="car-image"
               />
               <label
                 htmlFor="photo-upload"
@@ -129,6 +133,7 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
           <button
             type="submit"
             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+            data-cy="car-submit"
           >
             Submit
           </button>
