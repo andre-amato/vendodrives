@@ -48,10 +48,14 @@ describe('Car Integration Tests', () => {
     const car = new Car({ title: 'Car 3', price: 20000, zipCode: '54321', photo: 'url', user: new mongoose.Types.ObjectId() });
     await car.save();
 
+    const savedCar = await Car.findById(car._id);
+    expect(savedCar).not.toBeNull();
+
     const response = await request(app).delete(`/cars/${car._id}`);
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Car removed');
 
+    
     // Verify that the car was deleted from the database
     const deletedCar = await Car.findById(car._id);
     expect(deletedCar).toBeNull();

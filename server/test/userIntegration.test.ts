@@ -43,11 +43,13 @@ describe('User Integration Tests', () => {
     const hashedPassword = await bcrypt.hash('password123', 10);
     const user = new User({ name: 'Existing User', email: 'user@example.com', password: hashedPassword });
     await user.save();
-
+  
+    console.log('Created user:', user);
+  
     const response = await request(app)
       .post('/users/login')
       .send({ email: 'user@example.com', password: 'password123' });
-
+  
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Login successful');
     expect(response.body.token).toBeDefined();
