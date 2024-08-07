@@ -20,9 +20,9 @@ const app = express();
 app.use(express.json());
 app.use('/users', userRoutes);
 
-describe('User Routes', () => {
+describe('User Routing and Controller', () => {
   afterEach(() => {
-    vi.clearAllMocks(); // Clear mock calls between tests
+    vi.clearAllMocks();
   });
 
   it('registerUser should be called on POST requests to /users/register', async () => {

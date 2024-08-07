@@ -20,9 +20,9 @@ const app = express();
 app.use(express.json());
 app.use('/cars', carRoutes);
 
-describe('Car Routes', () => {
+describe('Car Routing and Controller', () => {
   afterEach(() => {
-    vi.clearAllMocks(); // Clear mock calls between tests
+    vi.clearAllMocks();
   });
 
   it('getCars should be called on GET requests to /cars', async () => {
