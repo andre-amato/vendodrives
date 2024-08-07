@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import express from 'express';
 import userRoutes from '../routes/userRoutes';
 import { User } from '../models/user';
-import { Car } from '../models/car';
+import Car from '../models/car';
 
 const app = express();
 app.use(express.json());

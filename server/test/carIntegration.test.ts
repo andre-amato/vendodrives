@@ -3,7 +3,7 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import express from 'express';
 import carRoutes from '../routes/carRoutes';
-import { Car } from '../models/car';
+import Car from '../models/car';
 import { User } from '../models/user';
 
 const app = express();
