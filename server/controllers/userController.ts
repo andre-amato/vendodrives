@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { User, UserInterface } from '../models/user';
-import { Car, CarInterface } from '../models/car';
+import Car, { CarInterface } from '../models/car';
 
 // Register a new user
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
