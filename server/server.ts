@@ -12,14 +12,14 @@ const app: Application = express();
 const port: number = parseInt(process.env.PORT as string, 10) || 5001;
 
 // Middleware
-app.use(cors()); // Use cors middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI as string) // Add connection options
+  .connect(process.env.MONGO_URI as string)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err: Error) => console.error('Failed to connect to MongoDB:', err));
 

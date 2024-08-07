@@ -34,12 +34,10 @@ const userSchema: Schema<UserInterface> = new Schema({
   ],
 });
 
-// Hash the user's password before saving the user model
 userSchema.pre<UserInterface>('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
   }
-
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -49,11 +47,9 @@ userSchema.pre<UserInterface>('save', async function (next) {
   }
 });
 
-// Method to compare the password
 userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
   return await bcrypt.compare(password, this.password);
 };
 
 export const User: Model<UserInterface> = mongoose.model<UserInterface>('User', userSchema);
-
 export default User;

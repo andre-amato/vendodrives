@@ -11,17 +11,14 @@ interface MulterRequest extends Request {
   file: Express.Multer.File;
 }
 
-// Route to get all cars
 router.get('/', (req: Request, res: Response) => {
   getCars(req, res);
 });
 
-// Route to get a car by ID
 router.get('/:id', (req: Request, res: Response) => {
   getCarById(req, res);
 });
 
-// Route to create a car
 router.post('/', upload, (req: Request, res: Response) => {
   const multerReq = req as MulterRequest;
   if (!multerReq.file) {
@@ -31,7 +28,6 @@ router.post('/', upload, (req: Request, res: Response) => {
   createCar(multerReq, res);
 });
 
-// Route to delete a car by ID
 router.delete('/:id', (req: Request, res: Response) => {
   deleteCar(req, res);
 });
