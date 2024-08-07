@@ -92,8 +92,8 @@ describe("E2E tests", () => {
     cy.get("[data-cy=logout]").click();
     cy.url().should("include", "/");
     cy.visit("/main");
-    cy.url().should("include", "/");
+    cy.url().should("not.include", "/main").and("include", "/");
     cy.visit("/user-cars");
-    cy.url().should("include", "/");
+    cy.url().should("not.include", "/user-cars").and("include", "/");
   });
 });

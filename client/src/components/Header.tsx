@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center space-x-4 xs:space-x-6 sm:space-x-6">
         <img
           src={racingFlag}
-          alt="Racing Flag"
+          alt="Racing Flag representing VendoDrives"
           className="w-24 h-14 xs:w-28 xs:h-16 sm:w-24 sm:h-14"
           style={{
             filter:
@@ -64,11 +64,16 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
       {showNavLinks && (
-        <nav className="w-full sm:w-auto">
+        <nav className="w-full sm:w-auto" role="navigation">
           <div className="flex justify-end sm:hidden">
-            <HamburgerButton onClick={toggleMenu} />
+            <HamburgerButton
+              onClick={toggleMenu}
+              aria-expanded={isMenuOpen}
+              aria-controls="main-menu"
+            />
           </div>
           <div
+            id="main-menu"
             className={`flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 ${
               isMenuOpen ? "flex" : "hidden"
             } sm:flex`}
@@ -78,18 +83,25 @@ const Header: React.FC<HeaderProps> = ({
                 <input
                   type="text"
                   placeholder="Search..."
+                  aria-label="Search"
                   className="mt-2 sm:mt-0 px-4 py-2 border border-gray-300 rounded-full w-full sm:w-auto text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onChange={handleSearchChange}
                 />
                 <Link
                   to="/messages"
                   className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                  aria-current={
+                    location.pathname === "/messages" ? "page" : undefined
+                  }
                 >
                   Messages
                 </Link>
                 <Link
                   to="/user-cars"
                   className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                  aria-current={
+                    location.pathname === "/user-cars" ? "page" : undefined
+                  }
                 >
                   My Cars
                 </Link>
@@ -98,6 +110,9 @@ const Header: React.FC<HeaderProps> = ({
               <Link
                 to="/main"
                 className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                aria-current={
+                  location.pathname === "/main" ? "page" : undefined
+                }
               >
                 Main
               </Link>
