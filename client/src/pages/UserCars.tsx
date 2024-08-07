@@ -74,6 +74,7 @@ const UserCars: React.FC = () => {
                   <button
                     onClick={() => handleDelete(car._id)}
                     className="bg-red-500 text-white py-2 px-4 rounded-full"
+                    data-cy="car-delete"
                   >
                     Delete
                   </button>

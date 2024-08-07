@@ -24,6 +24,7 @@ const Card: React.FC<CardProps> = ({ carDetails }) => {
           style={{ width: "400px", height: "400px" }}
           src={photo ? photo : "https://via.placeholder.com/400"}
           alt={title || "Sample Image"}
+          data-cy="car-card"
         />
       </Link>
       <div className="px-6 py-4">

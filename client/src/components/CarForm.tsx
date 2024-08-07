@@ -69,49 +69,65 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
         <div className="flex flex-col gap-4">
           {/* Title Input */}
           <div className="flex flex-row items-center">
-            <label className="w-1/4 text-gray-700 mr-2">Car:</label>
+            <label htmlFor="car" className="w-1/4 text-gray-700 mr-2">
+              Car:
+            </label>
             <input
               type="text"
+              id="car"
               value={title}
               onChange={handleTitleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
               required
+              data-cy="car-name"
             />
           </div>
           {/* Price Input */}
           <div className="flex flex-row items-center">
-            <label className="w-1/4 text-gray-700 mr-2">Price:</label>
+            <label htmlFor="price" className="w-1/4 text-gray-700 mr-2">
+              Price:
+            </label>
             <input
               type="text"
+              id="price"
               value={price}
               onChange={handlePriceChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
               placeholder="€0.00"
               required
+              data-cy="car-price"
             />
           </div>
           {/* Zip Code Input */}
           <div className="flex flex-row items-center">
-            <label className="w-1/4 text-gray-700 mr-2">Zip Code:</label>
+            <label htmlFor="zip-code" className="w-1/4 text-gray-700 mr-2">
+              Zip Code:
+            </label>
             <input
               type="text"
+              id="zip-code"
               value={zipCode}
               onChange={handleZipCodeChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
               placeholder="Enter Zip Code"
               maxLength={10}
               required
+              data-cy="car-zipcode"
             />
           </div>
           {/* Photo Upload */}
           <div className="flex flex-row items-center">
-            <label className="w-1/4 text-gray-700 mr-2">Photo:</label>
+            <label htmlFor="photo-upload" className="w-1/4 text-gray-700 mr-2">
+              Photo:
+            </label>
             <div className="relative w-full">
               <input
                 type="file"
                 onChange={handlePhotoChange}
                 className="absolute opacity-0 w-full h-full cursor-pointer"
                 id="photo-upload"
+                required
+                data-cy="car-image"
               />
               <label
                 htmlFor="photo-upload"
@@ -129,6 +145,8 @@ const CarForm: React.FC<CarFormProps> = ({ onSubmit }) => {
           <button
             type="submit"
             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+            data-cy="car-submit"
+            aria-pressed={submitted}
           >
             Submit
           </button>
