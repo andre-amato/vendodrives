@@ -16,7 +16,6 @@ vi.mock('../controllers/userController', () => ({
   getUserCars: (req: any, res: any) => mockGetUserCars(req, res),
 }));
 
-// Create an Express app instance
 const app = express();
 app.use(express.json());
 app.use('/users', userRoutes);
@@ -26,7 +25,7 @@ describe('User Routes', () => {
     vi.clearAllMocks(); // Clear mock calls between tests
   });
 
-  it('should call registerUser on POST /users/register', async () => {
+  it('registerUser should be called on POST requests to /users/register', async () => {
     mockRegisterUser.mockImplementation((req, res) => res.status(201).json({ message: 'User registered successfully' }));
 
     const response = await request(app)
@@ -38,7 +37,7 @@ describe('User Routes', () => {
     expect(mockRegisterUser).toHaveBeenCalled();
   });
 
-  it('should call loginUser on POST /users/login', async () => {
+  it('loginUser should be called on POST requests to /users/login', async () => {
     mockLoginUser.mockImplementation((req, res) => res.status(200).json({ message: 'Login successful', token: 'fake-jwt-token' }));
 
     const response = await request(app)
@@ -50,7 +49,7 @@ describe('User Routes', () => {
     expect(mockLoginUser).toHaveBeenCalled();
   });
 
-  it('should call updateUserCars on PUT /users/update-cars', async () => {
+  it('updateUserCars should be called on PUT requests to /users/update-cars', async () => {
     mockUpdateUserCars.mockImplementation((req, res) => res.status(200).json({ message: 'User cars updated successfully' }));
 
     const response = await request(app)
@@ -62,7 +61,7 @@ describe('User Routes', () => {
     expect(mockUpdateUserCars).toHaveBeenCalled();
   });
 
-  it('should call getUserCars on GET /users/:userId/cars', async () => {
+  it('getUserCars should be called on GET requests to /users/:userId/cars', async () => {
     const mockCars = [{ _id: 'carId1', title: 'Car 1', price: 10000 }];
     mockGetUserCars.mockImplementation((req, res) => res.status(200).json(mockCars));
 
