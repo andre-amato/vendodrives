@@ -67,6 +67,24 @@ describe("E2E tests", () => {
       }
     });
   });
+
+  it("should edit the price of one of my cars successfully", () => {
+    cy.visit("/user-cars");
+    cy.contains("My Cars");
+
+    cy.intercept("PUT", "http://localhost:5001/cars/*/price").as("editPrice");
+
+    cy.get("[data-cy=car-edit]").first().click();
+    cy.get("[data-cy=car-edit-price]").clear().type("2000");
+    cy.get("[data-cy=car-save]").click();
+
+    cy.wait("@editPrice").then((interception) => {
+      if (interception.response) {
+        expect(interception.response.statusCode).to.equal(200);
+      }
+    });
+  });
+
   it("should visit a car details page successfully", () => {
     cy.visit("/main");
     cy.intercept("GET", "http://localhost:5001/cars/*").as("getCarDetails");

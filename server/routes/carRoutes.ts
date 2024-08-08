@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from 'express';
 import multer from 'multer';
-import { getCars, createCar, getCarById, deleteCar } from '../controllers/carController';
+import { getCars, createCar, getCarById, deleteCar, updateCarPrice } from '../controllers/carController';
 
 const router: Router = express.Router();
 const storage = multer.memoryStorage();
@@ -30,6 +30,10 @@ router.post('/', upload, (req: Request, res: Response) => {
 
 router.delete('/:id', (req: Request, res: Response) => {
   deleteCar(req, res);
+});
+
+router.put('/:id/price', (req: Request, res: Response) => {
+  updateCarPrice(req, res);
 });
 
 export default router;

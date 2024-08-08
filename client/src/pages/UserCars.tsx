@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/Header";
@@ -13,8 +14,9 @@ interface Car {
 const UserCars: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [editingCarId, setEditingCarId] = useState<string | null>(null);
+  const [newPrice, setNewPrice] = useState<number | string>("");
 
-  // Retrieve userId from local storage or any other state management
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -45,6 +47,35 @@ const UserCars: React.FC = () => {
       setError("Error deleting car");
       console.error(err);
     }
+  };
+
+  const handleEdit = (carId: string, price: number) => {
+    setEditingCarId(carId);
+    setNewPrice(price);
+  };
+
+  const handleSave = async (carId: string) => {
+    try {
+      console.log("Sending update request with price:", newPrice);
+      const response = await axios.put(
+        `http://localhost:5001/cars/${carId}/price`,
+        { price: newPrice },
+      );
+      const updatedCar = response.data;
+      setCars(
+        cars.map((car) => (car._id === updatedCar._id ? updatedCar : car)),
+      );
+      setEditingCarId(null);
+      setNewPrice("");
+    } catch (error: any) {
+      console.error("Error updating car price:", error);
+      setError(error.response?.data?.message || "Error updating car price");
+    }
+  };
+
+  const handleCancel = () => {
+    setEditingCarId(null);
+    setNewPrice("");
   };
 
   if (error) return <p>{error}</p>;
@@ -78,9 +109,38 @@ const UserCars: React.FC = () => {
                   >
                     Delete
                   </button>
-                  <button className="bg-green-500 text-white py-2 px-4 rounded-full">
-                    Edit
-                  </button>
+                  {editingCarId === car._id ? (
+                    <>
+                      <input
+                        type="number"
+                        value={newPrice}
+                        onChange={(e) => setNewPrice(e.target.value)}
+                        className="border p-2 rounded w-20"
+                        data-cy="car-edit-price"
+                      />
+                      <button
+                        onClick={() => handleSave(car._id)}
+                        className="bg-green-500 text-white py-2 px-4 rounded-full"
+                        data-cy="car-save"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className="bg-gray-500 text-white py-2 px-4 rounded-full"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => handleEdit(car._id, car.price)}
+                      className="bg-green-500 text-white py-2 px-4 rounded-full"
+                      data-cy="car-edit"
+                    >
+                      Edit
+                    </button>
+                  )}
                 </div>
               </div>
             ))

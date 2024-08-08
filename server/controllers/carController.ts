@@ -92,3 +92,24 @@ export const deleteCar = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const updateCarPrice = async (req: Request, res: Response): Promise<void> => {
+  const { id } = req.params;
+  const { price } = req.body;
+
+  if (!price) {
+    res.status(400).json({ message: 'Price is required' });
+    return;
+  }
+
+  try {
+    const car = await Car.findByIdAndUpdate(id, { price }, { new: true });
+    if (!car) {
+      res.status(404).json({ message: 'Car not found' });
+      return;
+    }
+    res.json(car);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
