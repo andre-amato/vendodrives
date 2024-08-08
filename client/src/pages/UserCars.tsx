@@ -56,7 +56,6 @@ const UserCars: React.FC = () => {
 
   const handleSave = async (carId: string) => {
     try {
-      console.log("Sending update request with price:", newPrice);
       const response = await axios.put(
         `http://localhost:5001/cars/${carId}/price`,
         { price: newPrice },
