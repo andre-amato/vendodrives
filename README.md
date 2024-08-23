@@ -2,37 +2,13 @@
 
 Vendodrives is a web application for managing and viewing messages related to vehicle listings. Users can view received messages, send new messages, post cars, and see cars by their geolocalization and other criteria. The project is built using React and Tailwind CSS in a MERN structure (MongoDB, Express, Node.js, and React).
 
-## Features
-
-- Post new cars
-- View cars
-- Filter cars by localization, price, and other criteria
-- View received messages
-- Send new messages
-- Manage your posted cars (view, edit, and delete)
-- Responsive design with optimized layout for mobile and desktop
-
-## Technologies Used
-
-- React + Vite
-- Tailwind CSS
-- Express
-- MongoDB
-- Node.js
-- Cloudinary
-- Leaflet
-- OpenStreetMap
-- JWT (JSON Web Token)
-
-## Installation
+## Getting Started
 
 1. Clone the repository:
 
-   ```sh
    git clone https://github.com/andre-amato/vendodrive.git
    cd vendodrives
 
-   ```
 
 2. Install the dependencies and running the client:
 
@@ -55,6 +31,29 @@ Vendodrives is a web application for managing and viewing messages related to ve
    npm run build
 
    npm start
+
+## Features
+
+- Post new cars
+- View cars
+- Filter cars by localization, price, and other criteria
+- View received messages
+- Send new messages
+- Manage your posted cars (view, edit, and delete)
+- Responsive design with optimized layout for mobile and desktop
+
+## Technologies Used
+
+- React + Vite
+- Tailwind CSS
+- Express
+- MongoDB
+- Node.js
+- Cloudinary
+- Leaflet
+- OpenStreetMap
+- JWT (JSON Web Token)
+
 
 **Components**
 Header
