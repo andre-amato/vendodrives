@@ -31,29 +31,31 @@ Vendodrives is a web application for managing and viewing messages related to ve
    ```sh
    git clone https://github.com/andre-amato/vendodrive.git
    cd vendodrives
-   
-2. Install the dependencies:
-   
+
+   ```
+
+2. Install the dependencies and running the client:
+
    - Running the client:
-     
+
    cd client
-   
+
    npm i
-   
+
+   npm run build
+
    npm run dev
 
-   - Running the server:
-     
+3. Install the dependencies and running the server:
+
    cd server
-   
+
    npm i
 
-   *create an .env file following the example.env file()*
-   
-   node server.js
-     
+   _create an .env file following the example.env file()_
 
-4. Start the development server:
+   npm run build
+
    npm start
 
 **Components**
@@ -121,7 +123,6 @@ Make your changes and commit them: git commit -m 'Add some feature'.
 Push to the branch: git push origin feature/your-feature-name.
 Open a pull request to the main branch.
 
-
 **Acknowledgements**
 
 - React
@@ -139,13 +140,9 @@ Open a pull request to the main branch.
 <img width="1512" alt="image" src="https://github.com/user-attachments/assets/dd2a4d4d-7ded-4a77-80a9-e0f884fe67f2">
 <img width="1512" alt="image" src="https://github.com/user-attachments/assets/80fb2fc6-201a-4242-a547-ea991fc92e5f">
 
-
-
 **SM View**
 
 <img width="357" alt="image" src="https://github.com/user-attachments/assets/5237b73e-89d5-4f52-b0ff-7227a9f2f4a3">
 <img width="345" alt="image" src="https://github.com/user-attachments/assets/009e1efd-365a-4c1f-8a4d-3d3c6fa0216d">
 <img width="356" alt="image" src="https://github.com/user-attachments/assets/3bffbdb5-fe1f-4ae7-8ed0-1d50cc946c94">
 <img width="346" alt="image" src="https://github.com/user-attachments/assets/c8be10be-f4c4-4b50-8cbc-940470959e3c">
-
-
