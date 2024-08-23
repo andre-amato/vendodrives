@@ -36,8 +36,6 @@ Vendodrives is a web application for managing and viewing messages related to ve
 
 2. Install the dependencies and running the client:
 
-   - Running the client:
-
    cd client
 
    npm i
